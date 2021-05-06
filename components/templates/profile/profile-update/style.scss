@@ -1,0 +1,60 @@
+@import '../../../../styles/variables';
+
+.profile-update {
+    .info-card {
+        margin: auto;
+        margin-top: rem(32px);
+        padding: rem(12px);
+        // height: rem(350px);
+        width: 80%;
+        background-color: $color-white;
+        border-radius: rem(10px);
+        box-shadow: 0 rem(3px) rem(20px) rgba($color-black, 0.1);
+
+        .info-card-title {
+            padding: rem(12px);
+            font: $fw-semiBold rem(18px) $roboto-regular;
+        }
+
+        .card-divider {
+            width: 100%;
+            height: 1px;
+            background-color: $color-black;
+            opacity: 0.1;
+        }
+
+        .info {
+            display: flex;
+
+            .profile-picture {
+                margin: auto;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+
+                .rounded {
+                    width: rem(200px);
+                    height: rem(200px);
+                    object-fit: cover;
+                    border-radius: 100%;
+                }
+
+                &-button {
+                    margin: rem(10px);
+                }
+            }
+
+            .info-form {
+                display: inline-block;
+                margin-left: rem(24px);
+                padding: rem(24px);
+                width: 100%;
+
+                &-button {
+                    margin: rem(6px);
+                    margin-left: auto;
+                }
+            }
+        }
+    }
+}

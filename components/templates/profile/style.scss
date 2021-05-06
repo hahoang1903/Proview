@@ -1,0 +1,135 @@
+@import '../../../styles/variables';
+
+.profile-page {
+    background-color: $color-light-gray-bg;
+    height: 100%;
+    padding: rem(32px);
+
+    .divider {
+        height: 100%;
+        width: rem(1px);
+        background-color: $color-dark-blue;
+        opacity: 0.1;
+        position: absolute;
+        left: 0;
+    }
+
+    .horizontal-divider {
+        margin-top: rem(12px);
+        height: rem(1px);
+        width: 100%;
+        background-color: $color-dark-blue;
+        opacity: 0.1;
+    }
+
+    .page-title {
+        font: $fw-semiBold rem(28px) $roboto-regular;
+        padding-bottom: rem(24px);
+    }
+
+    .intro-box {
+        background-color: $color-white;
+        padding: rem(24px);
+        padding-bottom: 0;
+        border-radius: rem(10px);
+        box-shadow: 0 rem(3px) rem(20px) rgba($color-black, 0.1);
+
+        .intro {
+            display: flex;
+            align-items: center;
+
+            .profile-picture {
+                width: rem(150px);
+                height: rem(150px);
+
+                .rounded {
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 100%;
+                }
+            }
+
+            .name {
+                margin-left: rem(16px);
+
+                .full-name {
+                    font: $fw-semiBold rem(24px) $roboto-regular;
+                }
+
+                .title {
+                    font: $fw-normal rem(16px) $roboto-light;
+                }
+            }
+        }
+    }
+
+    .contact {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        padding: rem(24px);
+
+        .title {
+            font: $fw-semiBold rem(24px) $roboto-regular;
+        }
+
+        &-item {
+            margin-top: rem(12px);
+        }
+
+        &-icon {
+            margin-right: rem(8px);
+        }
+    }
+
+    .static {
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        &-item {
+            display: flex;
+            flex-direction: column;
+            color: $color-exodus-fruit;
+            align-items: center;
+
+            .number {
+                font: $fw-semiBold rem(18px) $roboto-regular;
+            }
+
+            .static-name {
+                font: $fw-normal rem(16px) $roboto-light;
+            }
+        }
+    }
+
+    .nav-bar {
+        .ant-tabs-nav {
+            margin-bottom: 0;
+        }
+
+        .ant-tabs-tab {
+            font: $fw-normal rem(16px) $roboto-light;
+            
+            &:hover {
+                color: unset;
+            }
+        }
+
+        .ant-tabs-tab.ant-tabs-tab-active {
+            .ant-tabs-tab-btn {
+                color: unset ;
+                font-weight: $fw-semiBold;
+            }
+        }
+    }
+
+    .dashboard {
+        .ant-row {
+            width: 100%;
+        }
+    }
+}

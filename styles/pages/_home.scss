@@ -1,0 +1,24 @@
+$color-test: #fffb00;
+
+.proview-home {
+	&-book-section {
+		height: 95vh;
+		background-image:
+			// url('../../public/img/book_lover.jpg');
+			linear-gradient(to right, rgba(0, 0, 0, 0.62)),
+			url('../../public/img/book_lover_1.jpg');
+		background-position: top;
+		background-size: cover;
+		background-repeat: no-repeat;
+		position: relative;
+
+		&-title {
+			@include center;
+			top: 30%;
+			color: $color-white;
+			text-transform: uppercase;
+			font-size: 3rem;
+			letter-spacing: 5px;
+		}
+	}
+}
