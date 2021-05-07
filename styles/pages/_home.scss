@@ -1,24 +1,83 @@
-$color-test: #fffb00;
-
 .proview-home {
-	&-book-section {
+	&-section {
 		height: 95vh;
-		background-image:
-			// url('../../public/img/book_lover.jpg');
-			linear-gradient(to right, rgba(0, 0, 0, 0.62)),
-			url('../../public/img/book_lover_1.jpg');
+		min-height: 600px;
+		padding-top: 11rem;
+
 		background-position: top;
 		background-size: cover;
 		background-repeat: no-repeat;
-		position: relative;
+
+		&--book {
+			background-image: linear-gradient(to right, rgba($color-black, 0.62)),
+				url('../../public/img/book_lover_1.jpg');
+		}
+
+		&--movie {
+			background-image: linear-gradient(to right, rgba($color-black, 0.62)),
+				url('../../public/img/movie.jpg');
+		}
 
 		&-title {
-			@include center;
-			top: 30%;
-			color: $color-white;
+			margin-bottom: 1rem;
 			text-transform: uppercase;
-			font-size: 3rem;
-			letter-spacing: 5px;
+			text-align: center;
+			color: $color-white;
+			font-weight: 500;
+
+			&--pretitle {
+				letter-spacing: 1.2px;
+				font-size: 1.08rem;
+			}
+
+			&--main {
+				letter-spacing: 4.5px;
+				font-size: 3rem;
+			}
+
+			&--sub {
+				font-weight: initial;
+				text-transform: initial;
+				font-size: 1rem;
+				padding: 0 10rem;
+			}
 		}
+
+		&-join {
+			text-align: center;
+			text-transform: uppercase;
+			font-weight: 500;
+			color: $color-white;
+			margin-top: 4.5rem;
+
+			&-button {
+				background: $color-primary;
+				display: inline-block;
+				padding: 1rem 3.75rem;
+				transition: all 0.22s;
+
+				&:hover {
+					transform: translateY(-3px);
+					box-shadow: 0 10px 20px rgba($color-black, 0.5);
+				}
+
+				&:active {
+					transform: translateY(-1px);
+					box-shadow: 0 5px 10px rgba($color-black, 0.5);
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 800px) {
+	.proview-home-section-title--sub {
+		padding: 0 5rem;
+	}
+}
+
+@media (max-width: 550px) {
+	.proview-home-section-title--sub {
+		padding: 0 1rem;
 	}
 }
