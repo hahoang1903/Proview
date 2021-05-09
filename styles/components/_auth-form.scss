@@ -1,0 +1,113 @@
+.auth-form {
+	width: 70%;
+	max-width: 650px;
+	margin: 2rem auto;
+
+	&-logo {
+		margin-top: 4rem;
+		text-align: center;
+	}
+
+	&-title {
+		text-align: center;
+		margin: 0.5rem 0 1.5rem 0;
+		display: flex;
+		flex-direction: column;
+
+		&--main {
+			text-transform: uppercase;
+			font-size: 24px;
+			font-family: BrownBold;
+			padding-bottom: 5px;
+		}
+
+		&--sub {
+			color: $color-shark;
+			font-family: BrownLight;
+			font-size: 17px;
+		}
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&-button.MuiButton-containedSizeLarge {
+		background-color: $color-primary;
+		color: $color-white;
+		font-size: 16px;
+		font-family: BrownRegular;
+		border: 2px solid $color-primary;
+		border-radius: 0;
+		padding: 10px 22px;
+		margin-top: 1.5rem;
+
+		&:hover {
+			background-color: $color-white;
+			color: $color-primary;
+		}
+	}
+
+	&-policy {
+		color: $color-shark;
+		text-align: center;
+		font-family: BrownLight;
+		margin: 1.75rem 0;
+	}
+
+	&-divider {
+		font-family: BrownLight;
+
+		span {
+			color: $color-nevada;
+			text-transform: uppercase;
+		}
+	}
+
+	&-link {
+		font-family: BrownRegular;
+		text-align: center;
+		text-decoration: underline;
+
+		&:hover {
+			text-decoration: none !important;
+		}
+
+		&:focus {
+			text-decoration: underline;
+		}
+
+		&--uppercase {
+			font-family: BrownBold;
+			text-transform: uppercase;
+		}
+
+		&--right {
+			margin-top: 1.5rem;
+			text-align: right;
+		}
+	}
+}
+
+@media (max-width: 700px) {
+	.auth-form {
+		width: 100%;
+		padding: 0 2rem;
+	}
+}
+
+@font-face {
+	font-family: BrownLight;
+	src: url('../../public/font/Brown Light.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: BrownRegular;
+	src: url('../../public/font/Brown Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: BrownBold;
+	src: url('../../public/font/Brown Bold.ttf') format('truetype');
+}

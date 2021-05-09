@@ -1,7 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import AuthForm from '../../elements/auth-form'
 
-const signUpTemplate = props => {
-	return <div></div>
+const SignUpTemplate = () => {
+	return (
+		<AuthForm
+			main="Create an account"
+			sub="Complete all fields to create your Proview ID."
+			formFields={[
+				{ name: 'Display name' },
+				{ name: 'Email address' },
+				{ name: 'Password' }
+			]}
+			submitText="Create"
+			linkText="Have an account? Login"
+			linkTo="/login"
+		/>
+	)
 }
 
-export default signUpTemplate
+export default SignUpTemplate

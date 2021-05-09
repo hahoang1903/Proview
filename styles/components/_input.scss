@@ -1,0 +1,31 @@
+.input {
+	.MuiFilledInput-root {
+		font-size: 16px;
+
+		background-color: $color-white;
+
+		&:hover,
+		&:active,
+		&:focus {
+			background-color: $color-white;
+		}
+
+		&.Mui-focused {
+			background-color: $color-white;
+		}
+	}
+
+	.MuiFormLabel-root {
+		font-size: 16px;
+
+		&.Mui-focused {
+			color: rgba($color-black, 0.87);
+			text-transform: uppercase;
+			font-size: 12.5px;
+		}
+	}
+
+	.MuiFilledInput-underline::after {
+		border-color: $color-black;
+	}
+}

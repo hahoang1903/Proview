@@ -1,8 +1,8 @@
 import React from 'react'
 import ForgotPasswordTemplate from '../../components/templates/forgot-password'
 
-const ForgotPasswordPage = props => {
-	useEffect(() => {
+const ForgotPasswordPage = () => {
+	React.useEffect(() => {
 		document.title = 'Forgot Password'
 	}, [])
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import LoginTemplate from '../../components/templates/login'
 
-const LoginPage = props => {
-	useEffect(() => {
+const LoginPage = () => {
+	React.useEffect(() => {
 		document.title = 'Login'
 	}, [])
 

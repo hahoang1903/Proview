@@ -6,6 +6,10 @@
 	box-sizing: border-box;
 }
 
+.MuiButton-contained {
+	box-shadow: none !important;
+}
+
 @media (max-width: 700px) {
 	html {
 		font-size: 14px;

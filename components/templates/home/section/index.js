@@ -17,7 +17,7 @@ const Section = ({ name, pretitle, title, sub }) => {
 			</div>
 
 			<div className="proview-home-section-join">
-				<Link href="/">
+				<Link href="/signup">
 					<a className="proview-home-section-join-button">Join our community</a>
 				</Link>
 			</div>

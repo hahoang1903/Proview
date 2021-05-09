@@ -1,7 +1,11 @@
 import React from 'react'
 import SignUpTemplate from '../../components/templates/signup'
 
-const SignUpPage = props => {
+const SignUpPage = () => {
+	React.useEffect(() => {
+		document.title = 'Sign up'
+	}, [])
+
 	return (
 		<React.Fragment>
 			<SignUpTemplate />
