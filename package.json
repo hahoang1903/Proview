@@ -12,6 +12,7 @@
 		"@svgr/webpack": "^5.5.0",
 		"antd": "^4.15.4",
 		"mongodb": "^3.5.9",
+		"mongoose": "^5.12.7",
 		"next": "latest",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"

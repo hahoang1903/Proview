@@ -2,6 +2,7 @@ import React from 'react'
 import { Layout } from 'antd'
 import AppHeader from './header'
 import AppSidebar from './sidebar'
+import AppFooter from './footer'
 
 const SiteLayout = props => {
 	const { Header, Footer, Content } = Layout
@@ -12,7 +13,9 @@ const SiteLayout = props => {
 				<AppHeader />
 			</Header>
 			<Content>{props.children}</Content>
-			<Footer></Footer>
+			<Footer>
+				<AppFooter />
+			</Footer>
 		</Layout>
 	)
 }

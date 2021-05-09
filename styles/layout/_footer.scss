@@ -1,0 +1,64 @@
+.ant-layout-footer {
+	background-color: $color-primary;
+	z-index: 2;
+}
+
+.app-footer {
+	color: $color-white;
+}
+
+@media (min-width: 1200px) {
+	.app-footer__payment-logo {
+		transform: scale(1.2);
+	}
+}
+
+.app-footer {
+	&__section {
+		margin-top: 1rem;
+
+		&--center {
+			text-align: center;
+			margin: 1.25rem 0;
+		}
+
+		&--right {
+			text-align: right;
+		}
+	}
+
+	&__title {
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	&__link,
+	&__item {
+		& > a {
+			color: inherit;
+		}
+
+		&--inline {
+			display: inline;
+			margin: 0 0.5rem;
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.app-footer {
+		&__section--right {
+			text-align: left;
+		}
+
+		&__link,
+		&__item {
+			&--inline {
+				display: block;
+				margin: 0.5rem 0;
+			}
+		}
+	}
+}

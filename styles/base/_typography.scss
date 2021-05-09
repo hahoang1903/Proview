@@ -1,3 +1,18 @@
 a {
 	color: inherit !important;
 }
+
+@font-face {
+	font-family: BrownLight;
+	src: url('../../public/font/Brown Light.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: BrownRegular;
+	src: url('../../public/font/Brown Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: BrownBold;
+	src: url('../../public/font/Brown Bold.ttf') format('truetype');
+}
