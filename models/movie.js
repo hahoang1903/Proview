@@ -3,6 +3,11 @@ import mongoose from 'mongoose'
 const { Schema } = mongoose
 
 const movieSchema = new Schema({
+	creator: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	},
 	name: {
 		type: String,
 		required: true
@@ -11,11 +16,11 @@ const movieSchema = new Schema({
 		type: String,
 		required: true
 	},
-	genre: {
+	genres: {
 		type: String,
 		required: true
 	},
-	author: {
+	directors: {
 		type: String,
 		required: true
 	},
@@ -30,9 +35,15 @@ const movieSchema = new Schema({
 	releasedYear: {
 		type: Number,
 		required: true
-	}
+	},
+	reviews: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Review'
+		}
+	]
 })
 
-const Movie = mongoose.model('Movie', movieSchema)
+const Movie = mongoose.models['Movie'] || mongoose.model('Movie', movieSchema)
 
 export default Movie

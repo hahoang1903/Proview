@@ -24,9 +24,38 @@ const userSchema = new Schema({
 		type: Date,
 		default: Date.now,
 		required: true
-	}
+	},
+	uploads: [
+		{
+			type: Schema.Types.ObjectId
+		}
+	],
+	reviews: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Review'
+		}
+	],
+	comments: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Comment'
+		}
+	]
 })
 
-const User = mongoose.model('User', userSchema)
+userSchema.virtual('bookUploads', {
+	ref: 'Book',
+	localField: 'uploads',
+	foreignField: '_id'
+})
+
+userSchema.virtual('movieUploads', {
+	ref: 'Movie',
+	localField: 'uploads',
+	foreignField: '_id'
+})
+
+const User = mongoose.models['User'] || mongoose.model('User', userSchema)
 
 export default User

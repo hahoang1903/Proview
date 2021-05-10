@@ -18,16 +18,12 @@ const reviewSchema = new Schema(
 			default: Date.now,
 			required: true
 		},
-		upvote: {
-			type: Number,
-			defalut: 0,
-			required: true
-		},
-		downvote: {
-			type: Number,
-			defalut: 0,
-			required: true
-		}
+		comments: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Comment'
+			}
+		]
 	},
 	{
 		toJSON: { virtuals: true }
@@ -48,6 +44,7 @@ reviewSchema.virtual('onMovie', {
 	justOne: true
 })
 
-const Review = mongoose.model('Review', reviewSchema)
+const Review =
+	mongoose.models['Review'] || mongoose.model('Review', reviewSchema)
 
 export default Review

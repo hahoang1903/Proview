@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const { Schema } = mongoose
 
 const commentSchema = new Schema({
-	author: {
+	creator: {
 		type: Schema.Types.ObjectId,
 		ref: 'User',
 		required: true
@@ -18,18 +18,13 @@ const commentSchema = new Schema({
 		default: Date.now,
 		required: true
 	},
-	upvote: {
-		type: Number,
-		defalut: 0,
-		required: true
-	},
-	downvote: {
-		type: Number,
-		defalut: 0,
+	content: {
+		type: String,
 		required: true
 	}
 })
 
-const Comment = mongoose.model('Comment', commentSchema)
+const Comment =
+	mongoose.models['Comment'] || mongoose.model('Comment', commentSchema)
 
 export default Comment

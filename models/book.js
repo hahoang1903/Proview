@@ -3,6 +3,11 @@ import mongoose from 'mongoose'
 const { Schema } = mongoose
 
 const bookSchema = new Schema({
+	creator: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	},
 	name: {
 		type: String,
 		required: true
@@ -11,11 +16,11 @@ const bookSchema = new Schema({
 		type: String,
 		required: true
 	},
-	genre: {
+	genres: {
 		type: String,
 		required: true
 	},
-	author: {
+	authors: {
 		type: String,
 		required: true
 	},
@@ -26,9 +31,15 @@ const bookSchema = new Schema({
 	releasedYear: {
 		type: Number,
 		required: true
-	}
+	},
+	reviews: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Review'
+		}
+	]
 })
 
-const Book = mongoose.model('Book', bookSchema)
+const Book = mongoose.models['Book'] || mongoose.model('Book', bookSchema)
 
 export default Book
