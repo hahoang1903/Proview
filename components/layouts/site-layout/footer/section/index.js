@@ -3,38 +3,30 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 
 const FooterSection = ({
-	align = 'left',
 	title = '',
-	items = [{ content: '', link: '' }],
-	inlineItems = false,
-	className,
+	items = [{ content: '', link: '', linkToEx: '' }],
+	className = '',
 	style
 }) => {
-	const finalClassName = `app-footer__section ${
-		align == 'left' ? '' : `app-footer__section--${align}`
-	} ${className ?? ''}`
-
 	return (
-		<div className={finalClassName} style={style}>
+		<div className={`app-footer__section ${className}`} style={style}>
 			<div className="app-footer__title">{title}</div>
 
 			{items.map((item, i) => {
-				return item.link ? (
-					<div
-						key={`item#${i}`}
-						className={`app-footer__link${
-							inlineItems ? ` app-footer__link--inline` : ''
-						}`}
-					>
-						<Link href={item.link}>{item.content}</Link>
+				return item.linkToEx ? (
+					<div key={`item#${i}`} className="app-footer__link">
+						<a target="_blank" href={item.linkToEx}>
+							{item.content}
+						</a>
+					</div>
+				) : item.link ? (
+					<div key={`item#${i}`} className="app-footer__link">
+						<Link href={item.link}>
+							<a>{item.content}</a>
+						</Link>
 					</div>
 				) : (
-					<div
-						key={`item#${i}`}
-						className={`app-footer__item${
-							inlineItems ? ` app-footer__item--inline` : ''
-						}`}
-					>
+					<div key={`item#${i}`} className="app-footer__item">
 						{item.content}
 					</div>
 				)
@@ -44,7 +36,6 @@ const FooterSection = ({
 }
 
 FooterSection.propTypes = {
-	align: PropTypes.oneOf(['left', 'right', 'center']),
 	title: PropTypes.any,
 	items: PropTypes.arrayOf(
 		PropTypes.shape({
