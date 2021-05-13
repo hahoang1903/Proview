@@ -1,15 +1,35 @@
 import React from 'react'
-import ForgotPasswordTemplate from '../../components/templates/forgot-password'
+import axios from 'axios'
+import AuthForm from '../../components/elements/auth-form'
 
 const ForgotPasswordPage = () => {
 	React.useEffect(() => {
-		document.title = 'Forgot Password'
+		document.title = 'Forgot password'
 	}, [])
 
 	return (
-		<React.Fragment>
-			<ForgotPasswordTemplate />
-		</React.Fragment>
+		<AuthForm
+			main="Forgot password"
+			sub="Provide your account's email address and a reset password email will be sent to your inbox."
+			formFields={[
+				{
+					name: 'email',
+					label: 'Email address',
+					rules: [
+						{
+							required: true,
+							type: 'email',
+							message: 'Please provide a valid email. Ex: example@gmail.com'
+						}
+					]
+				}
+			]}
+			submitText="Request reset"
+			linkText="Have an account? Login"
+			linkTo="/login"
+			method={axios.post}
+			action="forgot-password"
+		/>
 	)
 }
 
