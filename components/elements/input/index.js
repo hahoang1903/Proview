@@ -3,22 +3,20 @@ import TextField from '@material-ui/core/TextField'
 
 const Input = ({
 	name = '',
+	label = '',
 	className = '',
-	defaultValue = '',
-	type = 'text'
+	type = 'text',
+	value = '',
+	onChange = () => {}
 }) => {
-	const [value, setValue] = React.useState(defaultValue)
-
-	const handleChange = ({ value }) => setValue(value)
-
 	return (
 		<TextField
-			label={name}
+			label={label}
 			variant="filled"
 			className={`input ${className}`}
 			type={type}
 			value={value}
-			onChange={handleChange}
+			onChange={onChange}
 			name={name}
 		/>
 	)

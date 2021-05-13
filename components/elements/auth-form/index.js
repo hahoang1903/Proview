@@ -1,6 +1,7 @@
 import React from 'react'
+import axios from 'axios'
 import Button from '@material-ui/core/Button'
-import { Divider } from 'antd'
+import { Divider, Form } from 'antd'
 import Link from 'next/link'
 import BrandLogo from '../brand-logo'
 import Input from '../input'
@@ -12,8 +13,20 @@ const AuthForm = ({
 	submitText = '',
 	linkText = '',
 	linkTo = '/',
+	method = axios.post,
+	authRoute = '',
 	forgotPassword = false
 }) => {
+	const onFinish = async values => {
+		try {
+			const res = await method(`/api/auth/${authRoute}`, values)
+
+			console.log(res.data)
+		} catch (error) {
+			console.log(error.response.data.message)
+		}
+	}
+
 	return (
 		<div className="auth-form">
 			<div className="auth-form-logo">
@@ -25,16 +38,18 @@ const AuthForm = ({
 				<span className="auth-form-title--sub">{sub}</span>
 			</div>
 
-			<form>
+			<Form onFinish={onFinish}>
 				{formFields.map(field => {
 					return (
-						<Input
-							key={field.name}
-							name={field.name}
-							type={
-								field.name.toLowerCase() == 'password' ? 'password' : 'text'
-							}
-						/>
+						<Form.Item key={field.name} name={field.name} rules={field.rules}>
+							<Input
+								name={field.name}
+								label={field.label}
+								type={
+									field.name.toLowerCase() == 'password' ? 'password' : 'text'
+								}
+							/>
+						</Form.Item>
 					)
 				})}
 
@@ -54,7 +69,7 @@ const AuthForm = ({
 				>
 					{submitText}
 				</Button>
-			</form>
+			</Form>
 
 			<div className="auth-form-policy">
 				This site is protected by hCaptcha and its&nbsp;
