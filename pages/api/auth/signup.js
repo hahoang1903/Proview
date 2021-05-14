@@ -21,9 +21,10 @@ export default async function signUp(req, res) {
 
 				return sendTokenResponse(user, 201, res)
 			} catch (error) {
-				return res
-					.status(400)
-					.json({ success: false, message: 'Email already exists' })
+				return res.status(400).json({
+					success: false,
+					message: 'The email you provided is already exists'
+				})
 			}
 		default:
 			return res

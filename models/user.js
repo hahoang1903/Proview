@@ -21,7 +21,7 @@ const userSchema = new Schema({
 	},
 	role: {
 		type: String,
-		enum: ['user', 'publisher'],
+		enum: ['user', 'admin'],
 		default: 'user'
 	},
 	password: {
@@ -42,9 +42,16 @@ const userSchema = new Schema({
 		default: Date.now,
 		required: true
 	},
-	uploads: [
+	books: [
 		{
-			type: Schema.Types.ObjectId
+			type: Schema.Types.ObjectId,
+			ref: 'Book'
+		}
+	],
+	movies: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Movie'
 		}
 	],
 	reviews: [
@@ -59,18 +66,6 @@ const userSchema = new Schema({
 			ref: 'Comment'
 		}
 	]
-})
-
-userSchema.virtual('bookUploads', {
-	ref: 'Book',
-	localField: 'uploads',
-	foreignField: '_id'
-})
-
-userSchema.virtual('movieUploads', {
-	ref: 'Movie',
-	localField: 'uploads',
-	foreignField: '_id'
 })
 
 userSchema.pre('save', async function (next) {

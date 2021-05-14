@@ -28,6 +28,12 @@
 		}
 	}
 
+	&-error {
+		background-color: #f3d2d7;
+		color: #523439;
+		padding: 1rem;
+	}
+
 	form {
 		display: flex;
 		flex-direction: column;

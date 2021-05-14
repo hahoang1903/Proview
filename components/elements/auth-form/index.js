@@ -32,10 +32,11 @@ const AuthForm = ({
 			authDispatch({ user, token })
 			router.push('/')
 		} catch (error) {
-			console.log(error)
 			setErrorMessage(error.response.data.message)
 		}
 	}
+
+	const onFormFocus = () => setErrorMessage(null)
 
 	return (
 		<div className="auth-form">
@@ -48,7 +49,13 @@ const AuthForm = ({
 				<span className="auth-form-title--sub">{sub}</span>
 			</div>
 
-			<Form onFinish={onFinish}>
+			{errorMessage ? (
+				<div className="auth-form-error">
+					<span>{errorMessage}</span>
+				</div>
+			) : null}
+
+			<Form onFinish={onFinish} onFocus={onFormFocus}>
 				{formFields.map(field => {
 					return (
 						<Form.Item key={field.name} name={field.name} rules={field.rules}>
