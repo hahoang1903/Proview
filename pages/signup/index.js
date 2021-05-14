@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import AuthForm from '../../components/elements/auth-form'
-import { useAuthenticate } from '../../hooks/useUser'
+import { useAuthenticate } from '../../hooks/useAuth'
 
 const SignUpPage = () => {
 	React.useEffect(() => {

@@ -2,7 +2,7 @@ import SiteLayout from '../components/layouts/site-layout'
 import React from 'react'
 import Section from '../components/elements/section'
 import Carousel from '../components/elements/carousel'
-import { useAuthState } from '../hooks/useUser'
+import { useAuthState } from '../hooks/useAuth'
 
 const HomePage = () => {
 	const user = useAuthState()
