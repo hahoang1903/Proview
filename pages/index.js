@@ -2,8 +2,11 @@ import SiteLayout from '../components/layouts/site-layout'
 import React from 'react'
 import Section from '../components/elements/section'
 import Carousel from '../components/elements/carousel'
+import { useAuthState } from '../hooks/useUser'
 
 const HomePage = () => {
+	const user = useAuthState()
+	console.log(user)
 	React.useEffect(() => {
 		document.title = 'Proview - Trusted rating site'
 	}, [])

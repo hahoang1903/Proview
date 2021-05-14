@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import AuthForm from '../../components/elements/auth-form'
+import { useAuthenticate } from '../../hooks/useUser'
 
 const SignUpPage = () => {
 	React.useEffect(() => {
@@ -45,11 +46,12 @@ const SignUpPage = () => {
 					]
 				}
 			]}
-			method={axios.post}
-			action="signup"
+			fetchMethod={axios.post}
+			authRoute="signup"
 			submitText="Create"
 			linkText="Have an account? Login"
 			linkTo="/login"
+			useAuthDispatch={useAuthenticate}
 		/>
 	)
 }

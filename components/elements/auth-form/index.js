@@ -1,10 +1,11 @@
 import React from 'react'
-import axios from 'axios'
 import Button from '@material-ui/core/Button'
 import { Divider, Form } from 'antd'
 import Link from 'next/link'
 import BrandLogo from '../brand-logo'
 import Input from '../input'
+import PropTypes from 'prop-types'
+import { useRouter } from 'next/router'
 
 const AuthForm = ({
 	main = '',
@@ -13,17 +14,26 @@ const AuthForm = ({
 	submitText = '',
 	linkText = '',
 	linkTo = '/',
-	method = axios.post,
+	forgotPassword = false,
+	fetchMethod,
 	authRoute = '',
-	forgotPassword = false
+	useAuthDispatch
 }) => {
+	const router = useRouter()
+	const authDispatch = useAuthDispatch()
+	const [errorMessage, setErrorMessage] = React.useState('')
+
 	const onFinish = async values => {
 		try {
-			const res = await method(`/api/auth/${authRoute}`, values)
+			const res = await fetchMethod(`/api/auth/${authRoute}`, values)
 
-			console.log(res.data)
+			const { user, token } = res.data
+
+			authDispatch({ user, token })
+			router.push('/')
 		} catch (error) {
-			console.log(error.response.data.message)
+			console.log(error)
+			setErrorMessage(error.response.data.message)
 		}
 	}
 
@@ -99,6 +109,18 @@ const AuthForm = ({
 				</Link>
 			</div>
 		</div>
+	)
+}
+
+AuthForm.propTypes = {
+	fetchMethod: PropTypes.func.isRequired,
+	useAuthDispatch: PropTypes.func.isRequired,
+	formFields: PropTypes.arrayOf(
+		PropTypes.shape({
+			name: PropTypes.string,
+			label: PropTypes.string,
+			rules: PropTypes.array
+		})
 	)
 }
 
