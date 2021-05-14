@@ -1,0 +1,24 @@
+.resource-card {
+	width: 20rem;
+
+	&:not(:first-child) {
+		margin-left: 2rem;
+	}
+
+	&-image {
+		height: 18rem;
+
+		&.MuiCardMedia-root {
+			background-size: cover;
+			background-position: left top;
+		}
+
+		&--books {
+			background-image: url('../../public/img/books.jpg');
+		}
+
+		&--movies {
+			background-image: url('../../public/img/movies.jpg');
+		}
+	}
+}

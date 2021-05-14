@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import { Row, Col, Input } from 'antd'
+import { Row, Col } from 'antd'
 import AuthControl from './auth-control'
+import SearchBar from '../../../elements/search-bar'
 
 const AppHeader = () => {
 	return (
@@ -23,10 +24,7 @@ const AppHeader = () => {
 			</Col>
 
 			<Col xs={0} md={14} className="proview-header-search-bar">
-				<Input.Search
-					className="proview-header-search-bar_input"
-					placeholder="Search for anything"
-				/>
+				<SearchBar verticalCenter={true} />
 			</Col>
 
 			<Col xs={0} md={8} className="proview-header-auth">

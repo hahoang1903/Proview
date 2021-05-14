@@ -17,65 +17,6 @@
 
 	&-search-bar {
 		position: relative;
-
-		&_input {
-			@include vertical-center;
-			background: $color-spring-wood;
-			border: 1px solid $color-lemon-grass;
-			height: 2.5rem;
-			border-radius: 1000px;
-			display: flex;
-			align-items: center;
-
-			&:hover,
-			&:active,
-			&:focus {
-				border-color: darken($color-lemon-grass, 20%);
-			}
-
-			.ant-input-group {
-				display: flex;
-				flex-direction: row-reverse;
-			}
-
-			input {
-				background: transparent;
-				border: none;
-				padding-left: 3rem;
-
-				&::placeholder {
-					color: $color-tapa;
-					font-size: 1rem;
-				}
-			}
-
-			.ant-input-group-addon {
-				left: 0.65rem !important;
-				background: transparent;
-			}
-
-			button {
-				background: transparent;
-				border: none;
-
-				&.ant-input-search-button {
-					color: $color-tapa !important;
-				}
-
-				&::after {
-					display: none;
-				}
-			}
-
-			input,
-			button {
-				&:hover,
-				&:focus {
-					border: none;
-					box-shadow: none;
-				}
-			}
-		}
 	}
 
 	&-auth {

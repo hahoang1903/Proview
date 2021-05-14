@@ -3,10 +3,12 @@ import React from 'react'
 import Section from '../components/elements/section'
 import Carousel from '../components/elements/carousel'
 import { useAuthState } from '../hooks/useAuth'
+import ResourceCard from '../components/elements/resource-card'
+import Link from 'next/link'
 
 const HomePage = () => {
-	const user = useAuthState()
-	console.log(user)
+	const authState = useAuthState()
+
 	React.useEffect(() => {
 		document.title = 'Proview - Trusted rating site'
 	}, [])
@@ -18,20 +20,44 @@ const HomePage = () => {
 						name="book"
 						pretitle="Book rating"
 						title="For Book Lovers"
-						sub="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus
-					mollis nibh, non convallis ex convallis eu. Suspendisse potenti.
-					Aenean vitae pellentesque erat. Integer non tristique quam."
+						sub="Already know what kind of book you might want to read? Find it here"
 					/>
 
 					<Section
 						name="movie"
 						pretitle="Movie rating"
 						title="For Movie Addicts"
-						sub="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus
-					mollis nibh, non convallis ex convallis eu. Suspendisse potenti.
-					Aenean vitae pellentesque erat. Integer non tristique quam."
+						sub="Just finished watching a movie? Search for your next movie now"
 					/>
 				</Carousel>
+
+				<div className="proview-home-suggest">
+					<div className="proview-home-suggest_title">
+						<span className="proview-home-suggest_title--sub">
+							Don't know what to search for?
+						</span>
+						<span className="proview-home-suggest_title--main">Explore</span>
+					</div>
+
+					<div className="proview-home-suggest_options">
+						<ResourceCard title="Books" mediaType="books" />
+						<ResourceCard title="Movies" mediaType="movies" />
+					</div>
+				</div>
+
+				<div className="proview-home-suggest proview-home-suggest--npt">
+					<div className="proview-home-suggest_title">
+						<span className="proview-home-suggest_title--sub">
+							Wanna be a part of the community?
+						</span>
+					</div>
+
+					<div className="proview-home-suggest_options proview-home-suggest_options--cw">
+						<Link href="/signup">
+							<a className="proview-home-suggest-join-button">Join us</a>
+						</Link>
+					</div>
+				</div>
 			</div>
 		</SiteLayout>
 	)

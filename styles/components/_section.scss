@@ -8,13 +8,13 @@
 	background-repeat: no-repeat;
 
 	&--book {
-		background-image: linear-gradient(to right, rgba($color-black, 0.62)),
+		background-image: linear-gradient(to right, rgba($color-black, 0.7)),
 			url('../../public/img/book_lover.jpg');
 	}
 
 	&--movie {
-		background-image: linear-gradient(to right, rgba($color-black, 0.62)),
-			url('../../public/img/movie.jpg');
+		background-image: linear-gradient(to right, rgba($color-black, 0.7)),
+			url('../../public/img/movie_lover.jpg');
 	}
 
 	&-title {
@@ -42,27 +42,16 @@
 		}
 	}
 
-	&-join {
-		text-align: center;
-		text-transform: uppercase;
-		font-weight: 500;
-		color: $color-white;
-		margin-top: 4.5rem;
+	&-search-bar {
+		width: 70%;
+		max-width: 750px;
+		margin: 2rem auto;
 
-		&-button {
-			background: $color-primary;
-			display: inline-block;
-			padding: 1rem 3.75rem;
-			transition: all 0.22s;
+		.search-bar {
+			height: 3.5rem;
 
-			&:hover {
-				transform: translateY(-3px);
-				box-shadow: 0 10px 20px rgba($color-black, 0.5);
-			}
-
-			&:active {
-				transform: translateY(-1px);
-				box-shadow: 0 5px 10px rgba($color-black, 0.5);
+			&_input {
+				height: 3.5rem;
 			}
 		}
 	}

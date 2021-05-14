@@ -1,7 +1,19 @@
 import React from 'react'
-import Link from 'next/link'
+import SearchBar from '../search-bar'
 
 const Section = ({ name, pretitle, title, sub }) => {
+	const optionList = [
+		{ value: 'name', name: 'Name' },
+		{ value: 'genres', name: 'Genres' }
+	].concat(
+		name == 'book'
+			? [{ value: 'authors', name: 'Authors' }]
+			: [
+					{ value: 'directors', name: 'Directors' },
+					{ value: 'casts', name: 'Casts' }
+			  ]
+	)
+
 	return (
 		<div className={`section section--${name}`}>
 			<div className="section-title section-title--pretitle">{pretitle}</div>
@@ -10,10 +22,12 @@ const Section = ({ name, pretitle, title, sub }) => {
 
 			<div className="section-title section-title--sub">{sub}</div>
 
-			<div className="section-join">
-				<Link href="/signup">
-					<a className="section-join-button">Join our community</a>
-				</Link>
+			<div className="section-search-bar">
+				<SearchBar
+					optionList={optionList}
+					haveButton={true}
+					placeholder={`Search for ${name}s`}
+				/>
 			</div>
 		</div>
 	)
