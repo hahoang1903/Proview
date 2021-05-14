@@ -1,7 +1,6 @@
 import React from 'react'
 import { Layout } from 'antd'
 import AppHeader from './header'
-import AppSidebar from './sidebar'
 import AppFooter from './footer'
 
 const SiteLayout = props => {
