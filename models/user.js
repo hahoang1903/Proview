@@ -30,6 +30,9 @@ const userSchema = new Schema({
 		minlength: 8,
 		select: false
 	},
+	avatar: {
+		type: String
+	},
 	resetPasswordToken: String,
 	resetPasswordExpire: Date,
 	credit: {
