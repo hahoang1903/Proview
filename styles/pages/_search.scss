@@ -1,8 +1,21 @@
 .proview-search {
-	padding: 3rem 5rem;
+	padding: 0 5rem;
 
-	&-title {
-		font-size: 1.75rem;
-		font-family: BrownBold;
+	&-section {
+		padding: 1rem 0;
+
+		&:first-child {
+			padding-top: 3rem;
+		}
+
+		&:last-child {
+			padding-bottom: 3rem;
+		}
+
+		&_title {
+			font-size: 1.75rem;
+			font-family: BrownBold;
+			padding-bottom: 0.75rem;
+		}
 	}
 }

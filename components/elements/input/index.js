@@ -2,6 +2,7 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField'
 
 const Input = ({
+	inputProps = {},
 	name = '',
 	label = '',
 	className = '',
@@ -18,6 +19,7 @@ const Input = ({
 			value={value}
 			onChange={onChange}
 			name={name}
+			inputProps={inputProps}
 		/>
 	)
 }

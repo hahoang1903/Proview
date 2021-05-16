@@ -1,4 +1,35 @@
 .result-card {
-	&-title {
+	& > .resource-card {
+		width: 100%;
+
+		& > button {
+			display: flex;
+			justify-content: flex-start;
+			align-items: stretch;
+
+			& > img {
+				width: auto;
+			}
+
+			& > .MuiCardContent-root {
+				width: 100%;
+			}
+		}
+	}
+}
+
+@media (max-width: 575px) {
+	.result-card {
+		& > .resource-card {
+			& > button {
+				flex-direction: column;
+				align-items: center;
+
+				& > img {
+					width: 15rem;
+					height: auto;
+				}
+			}
+		}
 	}
 }

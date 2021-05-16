@@ -10,7 +10,7 @@ const HomePage = () => {
 	const authState = useAuthState()
 
 	React.useEffect(() => {
-		document.title = 'Proview - Trusted rating site'
+		document.title = 'Proview'
 	}, [])
 	return (
 		<SiteLayout>

@@ -1,13 +1,16 @@
 import React from 'react'
-
+import { useRouter } from 'next/router'
 import { Input, Select, Form } from 'antd'
 
 const SearchBar = ({
+	searchType = 'all',
 	optionList = [],
 	verticalCenter = false,
 	haveButton = false,
 	placeholder = 'Search for anything'
 }) => {
+	const router = useRouter()
+
 	const initialValues =
 		optionList.length > 0
 			? {
@@ -16,7 +19,15 @@ const SearchBar = ({
 			: {}
 
 	const onFinish = values => {
-		console.log(values)
+		var query = `?type=${searchType}`
+
+		query = values.search
+			? values.filterBy
+				? query.concat(`${values.filterBy.toLowerCase()}=${values.search}`)
+				: query.concat(`name=${values.search}`)
+			: query
+
+		router.push(`/search${query}`)
 	}
 
 	return (

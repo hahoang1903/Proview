@@ -1,0 +1,11 @@
+.advanced-search {
+	&_button {
+		color: $color-white !important;
+		background-color: $color-primary !important;
+
+		&-wrap {
+			display: flex;
+			justify-content: flex-end;
+		}
+	}
+}
