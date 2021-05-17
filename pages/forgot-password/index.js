@@ -1,10 +1,16 @@
 import React from 'react'
 import axios from 'axios'
 import AuthForm from '../../components/elements/auth-form'
+import { useAuthState } from '../../hooks/useAuth'
+import { useRouter } from 'next/router'
 
 const ForgotPasswordPage = () => {
+	const { token } = useAuthState()
+	const router = useRouter()
+
 	React.useEffect(() => {
 		document.title = 'Forgot password'
+		if (token) router.replace('/')
 	}, [])
 
 	return (

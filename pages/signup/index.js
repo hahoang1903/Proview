@@ -1,11 +1,16 @@
 import axios from 'axios'
 import React from 'react'
 import AuthForm from '../../components/elements/auth-form'
-import { useAuthenticate } from '../../hooks/useAuth'
+import { useAuthenticate, useAuthState } from '../../hooks/useAuth'
+import { useRouter } from 'next/router'
 
 const SignUpPage = () => {
+	const { token } = useAuthState()
+	const router = useRouter()
+
 	React.useEffect(() => {
 		document.title = 'Sign up'
+		if (token) router.replace('/')
 	}, [])
 
 	return (
