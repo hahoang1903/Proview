@@ -33,6 +33,11 @@ const userSchema = new Schema({
 	avatar: {
 		type: String
 	},
+	bio: {
+		type: String,
+		required: true,
+		default: 'Your bio is currently blank.'
+	},
 	resetPasswordToken: String,
 	resetPasswordExpire: Date,
 	credit: {
@@ -83,7 +88,7 @@ userSchema.pre('save', async function (next) {
 // Sign JWT and return
 userSchema.methods.getSignedJwtToken = function () {
 	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-		expiresIn: process.env.JWT_EXPIRE
+		noTimestamp: true
 	})
 }
 

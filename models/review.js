@@ -8,7 +8,15 @@ const reviewSchema = new Schema({
 		ref: 'User',
 		required: true
 	},
-	on: {
+	title: {
+		type: String,
+		required: true
+	},
+	content: {
+		type: String,
+		required: true
+	},
+	reviewOn: {
 		type: Schema.Types.ObjectId,
 		required: true,
 		refPath: 'onModel'
@@ -17,6 +25,11 @@ const reviewSchema = new Schema({
 		type: String,
 		required: true,
 		enum: ['Book', 'Movie']
+	},
+	score: {
+		type: Number,
+		required: true,
+		default: 0
 	},
 	at: {
 		type: Date,

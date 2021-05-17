@@ -21,6 +21,19 @@
 
 	&-auth {
 		text-align: right;
+		position: relative;
+
+		&_avatar {
+			@include vertical-center;
+			margin-left: auto;
+			margin-right: 0;
+
+			background-color: $color-primary !important;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
 
 		&_button {
 			&--contained {

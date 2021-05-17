@@ -1,0 +1,37 @@
+.profile-form {
+	&_title {
+		margin: 0.5rem 0 1.5rem 0;
+
+		text-transform: uppercase;
+		font-size: 24px;
+		font-family: BrownBold;
+		padding-bottom: 5px;
+	}
+
+	&_error {
+		background-color: $color-vanilla-ice;
+		color: $color-congo-brown;
+		padding: 1rem;
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&_button.MuiButton-containedSizeLarge {
+		background-color: $color-primary;
+		color: $color-white;
+		font-size: 16px;
+		font-family: BrownRegular;
+		border: 2px solid $color-primary;
+		border-radius: 0;
+		padding: 10px 22px;
+		margin-top: 1.5rem;
+
+		&:hover {
+			background-color: $color-white;
+			color: $color-primary;
+		}
+	}
+}

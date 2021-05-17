@@ -2,19 +2,30 @@ import React from 'react'
 import Link from 'next/link'
 import Button from '@material-ui/core/Button'
 import { useAuthState, useLogout } from '../../../../../hooks/useAuth'
+import { Avatar } from '@material-ui/core'
+import { Dropdown, Menu } from 'antd'
 
 const AuthControl = () => {
 	const authState = useAuthState()
 	const logout = useLogout()
 
+	const renderMenu = () => (
+		<Menu>
+			<Menu.Item key="profile">
+				<Link href={`/users/${authState.user._id}`}>
+					<a>Your profile</a>
+				</Link>
+			</Menu.Item>
+			<Menu.Item key="logout" onClick={logout}>
+				<span>Logout</span>
+			</Menu.Item>
+		</Menu>
+	)
+
 	return authState.token ? (
-		<Button
-			variant="outlined"
-			className="proview-header-auth_button proview-header-auth_button--outlined"
-			onClick={logout}
-		>
-			Logout
-		</Button>
+		<Dropdown overlay={renderMenu()} trigger={['click']}>
+			<Avatar className="proview-header-auth_avatar" />
+		</Dropdown>
 	) : (
 		<React.Fragment>
 			<Button

@@ -1,5 +1,6 @@
 import { dbConnect } from '../../../util/mongodb'
 import User from '../../../models/user'
+import { sendTokenResponse } from '../../../util/utils'
 
 dbConnect()
 
@@ -20,7 +21,7 @@ export default async function handler(req, res) {
 						.status(404)
 						.json({ success: false, message: 'User not found' })
 
-				return res.status(200).json({ success: true, data: user })
+				return sendTokenResponse(user, 200, res)
 			} catch (error) {
 				console.log(error)
 
@@ -40,7 +41,7 @@ export default async function handler(req, res) {
 						.status(404)
 						.json({ success: false, message: 'User not found' })
 
-				return res.status(200).json({ success: true, data: user })
+				return sendTokenResponse(user, 200, res)
 			} catch (error) {
 				return res
 					.status(400)
@@ -55,7 +56,7 @@ export default async function handler(req, res) {
 						.status(404)
 						.json({ success: false, message: 'User not found' })
 
-				return res.status(200).json({ success: true, data: user })
+				return sendTokenResponse(user, 200, res)
 			} catch (error) {
 				return res
 					.status(400)
