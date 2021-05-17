@@ -36,7 +36,9 @@ const HomePage = () => {
 						<span className="proview-home-suggest_title--sub">
 							Don't know what to search for?
 						</span>
-						<span className="proview-home-suggest_title--main">Explore</span>
+						<span className="proview-home-suggest_title--main">
+							Try our suggestion
+						</span>
 					</div>
 
 					<div className="proview-home-suggest_options">
@@ -56,6 +58,10 @@ const HomePage = () => {
 						<Link href="/signup">
 							<a className="proview-home-suggest-join-button">Join us</a>
 						</Link>
+
+						<div className="proview-home-suggest_small">
+							to post, reviews, comments, and many more
+						</div>
 					</div>
 				</div>
 			</div>

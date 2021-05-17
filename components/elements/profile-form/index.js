@@ -12,8 +12,7 @@ const ProfileForm = ({
 	formFields = [],
 	initialValues = {},
 	authRoute,
-	userId,
-	reset
+	userId
 }) => {
 	const router = useRouter()
 	const authDispatch = useAuthenticate()
@@ -29,7 +28,7 @@ const ProfileForm = ({
 			const { user, token } = res.data
 
 			authDispatch({ user, token })
-			router.reload(`/users/${user._id}`)
+			router.reload()
 		} catch (error) {
 			setErrorMessage(error.response.data.message)
 		}

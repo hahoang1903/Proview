@@ -40,6 +40,11 @@ const userSchema = new Schema({
 	},
 	resetPasswordToken: String,
 	resetPasswordExpire: Date,
+	score: {
+		type: Number,
+		required: true,
+		default: 0
+	},
 	since: {
 		type: Date,
 		default: Date.now,
@@ -61,12 +66,6 @@ const userSchema = new Schema({
 		{
 			type: Schema.Types.ObjectId,
 			ref: 'Review'
-		}
-	],
-	comments: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'Comment'
 		}
 	]
 })

@@ -8,9 +8,21 @@ export default async function handler(req, res) {
 
 	switch (method) {
 		case 'GET':
-			const { query } = req
+			const {
+				query: { author, reviewOn, limit }
+			} = req
+
 			try {
-				const reviews = await Review.find({})
+				var reviews
+				if (author) {
+					reviews = await Review.find({ author })
+						.limit(Number(limit))
+						.sort({ score: 1 })
+				} else if (reviewOn) {
+					reviews = await Review.find({ reviewOn }).sort({ score: 1 })
+				} else {
+					reviews = await Review.find({}).sort({ score: 1 })
+				}
 
 				return res.status(200).json({ success: true, data: reviews })
 			} catch (error) {

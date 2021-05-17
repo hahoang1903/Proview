@@ -77,10 +77,7 @@ const UserProfilePage = ({ user, token, reviews }) => {
 
 								<div className="proview-profile_credit">
 									<span className="proview-profile_credit--main">
-										{user.reviews.reduce(
-											(credit, review) => credit + review.score,
-											0
-										)}
+										{user.score}
 									</span>
 									<span className="proview-profile_credit--sub">Credit</span>
 								</div>
@@ -232,9 +229,8 @@ export const getStaticProps = async context => {
 
 	const reviewRes = await axios.get(`http://localhost:3000/api/reviews`, {
 		params: {
-			creator_id: id,
-			limit: 5,
-			sortBy: 'score'
+			author: id,
+			limit: 5
 		}
 	})
 
