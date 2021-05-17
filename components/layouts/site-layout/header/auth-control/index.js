@@ -24,13 +24,13 @@ const AuthControl = () => {
 
 	return authState.token ? (
 		<Dropdown overlay={renderMenu()} trigger={['click']}>
-			<Avatar className="proview-header-auth_avatar" />
+			<Avatar className="proview-header-right-item proview-header-right_avatar" />
 		</Dropdown>
 	) : (
 		<React.Fragment>
 			<Button
 				variant="outlined"
-				className="proview-header-auth_button proview-header-auth_button--outlined"
+				className="proview-header-right-item proview-header-right_button proview-header-right_button--outlined"
 			>
 				<Link href="/login">
 					<a>Log in</a>
@@ -39,7 +39,7 @@ const AuthControl = () => {
 
 			<Button
 				variant="contained"
-				className="proview-header-auth_button proview-header-auth_button--contained"
+				className="proview-header-right-item proview-header-right_button proview-header-right_button--contained"
 			>
 				<Link href="/signup">
 					<a>Sign Up</a>

@@ -19,15 +19,21 @@
 		position: relative;
 	}
 
-	&-auth {
-		text-align: right;
-		position: relative;
+	&-right {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		&-item {
+			margin-left: 1.5rem !important;
+			color: $color-tapa;
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
 
 		&_avatar {
-			@include vertical-center;
-			margin-left: auto;
-			margin-right: 0;
-
 			background-color: $color-primary !important;
 
 			&:hover {

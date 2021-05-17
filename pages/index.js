@@ -7,7 +7,7 @@ import ResourceCard from '../components/elements/resource-card'
 import Link from 'next/link'
 
 const HomePage = () => {
-	const authState = useAuthState()
+	const { token } = useAuthState()
 
 	React.useEffect(() => {
 		document.title = 'Proview'
@@ -47,23 +47,25 @@ const HomePage = () => {
 					</div>
 				</div>
 
-				<div className="proview-home-suggest proview-home-suggest--npt">
-					<div className="proview-home-suggest_title">
-						<span className="proview-home-suggest_title--sub">
-							Wanna be a part of the community?
-						</span>
-					</div>
+				{!token ? (
+					<div className="proview-home-suggest proview-home-suggest--npt">
+						<div className="proview-home-suggest_title">
+							<span className="proview-home-suggest_title--sub">
+								Wanna be a part of the community?
+							</span>
+						</div>
 
-					<div className="proview-home-suggest_options proview-home-suggest_options--cw">
-						<Link href="/signup">
-							<a className="proview-home-suggest-join-button">Join us</a>
-						</Link>
+						<div className="proview-home-suggest_options proview-home-suggest_options--cw">
+							<Link href="/signup">
+								<a className="proview-home-suggest-join-button">Join us</a>
+							</Link>
 
-						<div className="proview-home-suggest_small">
-							to post, reviews, comments, and many more
+							<div className="proview-home-suggest_small">
+								to post, reviews, comments, and many more
+							</div>
 						</div>
 					</div>
-				</div>
+				) : null}
 			</div>
 		</SiteLayout>
 	)

@@ -1,0 +1,10 @@
+.image-upload {
+	width: 12rem;
+	height: 15rem;
+	& .ant-upload.ant-upload-select-picture-card,
+	& .ant-upload-list-picture-card .ant-upload-list-item {
+		width: 12rem;
+		margin: 0;
+		height: 15rem;
+	}
+}

@@ -1,0 +1,62 @@
+.resource-form {
+	padding: 5rem 3rem;
+
+	&_title {
+		font-family: BrownBold;
+		font-size: 26px;
+		padding-bottom: 2rem;
+	}
+
+	&_form {
+		padding-left: 2.5rem;
+		padding-right: 3rem;
+	}
+
+	&-buttons {
+		display: flex;
+		padding-top: 1rem;
+
+		&_button {
+			margin-left: 1rem !important;
+			color: $color-white !important;
+			background-color: $color-primary !important;
+
+			&:hover {
+				background-color: darken($color-primary, 10%) !important;
+			}
+		}
+	}
+}
+
+@media (max-width: 980px) {
+	.resource-form_form {
+		padding-left: 4.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+@media (max-width: 800px) {
+	.resource-form_form {
+		padding-left: 5.5rem;
+		padding-right: 0.5rem;
+	}
+}
+
+@media (max-width: 767px) {
+	.resource-form {
+		&_image-upload {
+			display: flex;
+			justify-content: center;
+		}
+
+		&_form {
+			padding-left: 0;
+			padding-right: 1.5rem;
+			margin-top: 2rem;
+		}
+
+		&-buttons {
+			justify-content: flex-end;
+		}
+	}
+}
