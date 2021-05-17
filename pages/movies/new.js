@@ -3,7 +3,7 @@ import React from 'react'
 import ResourceForm from '../../components/elements/resource-form'
 import SiteLayout from '../../components/layouts/site-layout'
 
-const NewBookPage = () => {
+const NewMoviePage = () => {
 	React.useEffect(() => {
 		document.title = 'Create book'
 	}, [])
@@ -12,41 +12,51 @@ const NewBookPage = () => {
 		<SiteLayout>
 			<div className="proview-new">
 				<ResourceForm
-					title="Create new book"
+					title="Create new movie"
 					formFields={[
 						{
 							name: 'name',
-							label: 'Book name',
+							label: 'Movie name',
 							rules: [
 								{
 									required: true,
-									message: 'Please provide a book name'
+									message: 'Please provide a movie name'
 								}
 							]
 						},
 						{
-							name: 'authors',
-							label: 'Book authors',
+							name: 'directors',
+							label: 'Movie directors',
 							rules: [
 								{
 									required: true,
-									message: 'Please provide book authors'
+									message: 'Please provide movie directors'
+								}
+							]
+						},
+						{
+							name: 'casts',
+							label: 'Movie directors',
+							rules: [
+								{
+									required: true,
+									message: 'Please provide movie casts'
 								}
 							]
 						},
 						{
 							name: 'genres',
-							label: 'Book genres',
+							label: 'Movie genres',
 							rules: [
 								{
 									required: true,
-									message: 'Please provide book genres'
+									message: 'Please provide movie genres'
 								}
 							]
 						},
 						{
 							name: 'releasedYear',
-							label: 'Book released year',
+							label: 'Movie released year',
 							type: 'number',
 							inputProps: {
 								min: 1600
@@ -54,23 +64,23 @@ const NewBookPage = () => {
 							rules: [
 								{
 									required: true,
-									message: 'Please provide book released year'
+									message: 'Please provide movie released year'
 								}
 							]
 						},
 						{
 							name: 'plot',
-							label: 'Book description',
+							label: 'Movie description',
 							rules: [
 								{
 									required: true,
-									message: 'Please provide a book description'
+									message: 'Please provide a movie description'
 								}
 							]
 						}
 					]}
 					submitText="Create"
-					route="books"
+					route="movies"
 					fetchMethod={axios.post}
 				/>
 			</div>
@@ -78,4 +88,4 @@ const NewBookPage = () => {
 	)
 }
 
-export default NewBookPage
+export default NewMoviePage

@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
@@ -112,7 +113,9 @@ const ResourceForm = ({
 
 						<div className="resource-form-buttons">
 							<Button size="large" variant="contained">
-								Cancel
+								<Link href={`/users/${user ? user._id : null}/my-posts`}>
+									<a>Cancel</a>
+								</Link>
 							</Button>
 
 							<Button

@@ -40,6 +40,10 @@
 		transform: rotate(3deg) translate(0px, -4px);
 	}
 
+	& .spinner {
+		display: none;
+	}
+
 	& .spinner-icon {
 		width: 18px;
 		height: 18px;

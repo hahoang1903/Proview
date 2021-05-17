@@ -1,5 +1,13 @@
+import { v2 as cloudinary } from 'cloudinary'
 import { dbConnect } from '../../../util/mongodb'
 import Movie from '../../../models/movie'
+import User from '../../../models/user'
+
+cloudinary.config({
+	cloud_name: 'hahoangcloud',
+	api_key: '117721157213534',
+	api_secret: 'avMVdw0psnIOBTRYbdalFkaGxWQ'
+})
 
 dbConnect()
 
@@ -17,9 +25,16 @@ export default async function handler(req, res) {
 			}
 		case 'POST':
 			try {
-				const movie = await Movie.create(req.body)
+				const { body } = req
+				const image = await cloudinary.uploader.upload(body.image)
 
-				return res.status(201).json({ success: true, data: movie })
+				const movie = await Movie.create({ ...body, image: image.secure_url })
+
+				const user = await User.findById(body.creator)
+
+				user.movies.push(movie)
+
+				return res.status(201).json({ success: true, message: 'Movie created' })
 			} catch (error) {
 				return res.status(400).json({ success: false, error })
 			}

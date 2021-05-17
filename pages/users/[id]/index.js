@@ -1,11 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import { Row, Col, Image } from 'antd'
 import Link from 'next/link'
-import SiteLayout from '../../components/layouts/site-layout'
-import { useAuthState } from '../../hooks/useAuth'
-import DefaultAva from '../../public/img/default-avatar.svg'
-import ProfileForm from '../../components/elements/profile-form'
+import { Row, Col, Image } from 'antd'
+import { RightOutlined } from '@ant-design/icons'
+import SiteLayout from '../../../components/layouts/site-layout'
+import { useAuthState } from '../../../hooks/useAuth'
+import DefaultAva from '../../../public/img/default-avatar.svg'
+import ProfileForm from '../../../components/elements/profile-form'
 
 const UserProfilePage = ({ user, token, reviews }) => {
 	React.useEffect(() => {
@@ -52,6 +53,14 @@ const UserProfilePage = ({ user, token, reviews }) => {
 								onClick={() => setActiveTab(tabs[2])}
 							>
 								{tabs[2]}
+							</div>
+
+							<div className="proview-profile-tabs_tab">
+								<Link href={`/users/${user._id}/my-posts`}>
+									<a>
+										My posts <RightOutlined />
+									</a>
+								</Link>
 							</div>
 						</React.Fragment>
 					) : null}
