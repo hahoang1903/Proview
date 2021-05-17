@@ -7,19 +7,29 @@ import { Form } from 'antd'
 import Input from '../input'
 import { useAuthenticate } from '../../../hooks/useAuth'
 
-const ProfileForm = ({ title = '', formFields = [], initialValues = {} }) => {
+const ProfileForm = ({
+	title = '',
+	formFields = [],
+	initialValues = {},
+	authRoute,
+	userId,
+	reset
+}) => {
 	const router = useRouter()
 	const authDispatch = useAuthenticate()
 	const [errorMessage, setErrorMessage] = React.useState('')
 
 	const onFinish = async values => {
 		try {
-			const res = await axios.patch(`/api/`, values)
+			const res = await axios.patch(`/api/auth/${authRoute}`, {
+				...values,
+				id: userId
+			})
 
 			const { user, token } = res.data
 
 			authDispatch({ user, token })
-			router.push(`/users/${user._id}`)
+			router.reload(`/users/${user._id}`)
 		} catch (error) {
 			setErrorMessage(error.response.data.message)
 		}

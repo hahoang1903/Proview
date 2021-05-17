@@ -40,11 +40,6 @@ const userSchema = new Schema({
 	},
 	resetPasswordToken: String,
 	resetPasswordExpire: Date,
-	credit: {
-		type: Number,
-		default: 0,
-		required: true
-	},
 	since: {
 		type: Date,
 		default: Date.now,

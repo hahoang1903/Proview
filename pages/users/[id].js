@@ -77,7 +77,10 @@ const UserProfilePage = ({ user, token, reviews }) => {
 
 								<div className="proview-profile_credit">
 									<span className="proview-profile_credit--main">
-										{user.credit}
+										{user.reviews.reduce(
+											(credit, review) => credit + review.score,
+											0
+										)}
 									</span>
 									<span className="proview-profile_credit--sub">Credit</span>
 								</div>
@@ -178,6 +181,8 @@ const UserProfilePage = ({ user, token, reviews }) => {
 								},
 								{ name: 'bio', label: 'Bio' }
 							]}
+							authRoute="updateDetails"
+							userId={user._id}
 						/>
 					</div>
 				) : activeTab == tabs[2] ? (
@@ -186,18 +191,17 @@ const UserProfilePage = ({ user, token, reviews }) => {
 							title="Update Password"
 							formFields={[
 								{
-									name: 'oldPass',
-									label: 'Old password',
+									name: 'currentPassword',
+									label: 'Current password',
 									rules: [
 										{
 											required: true,
-											min: 8,
-											message: 'Please provide your old password'
+											message: 'Please provide your current password'
 										}
 									]
 								},
 								{
-									name: 'newPass',
+									name: 'newPassword',
 									label: 'New password',
 									rules: [
 										{
@@ -209,6 +213,8 @@ const UserProfilePage = ({ user, token, reviews }) => {
 									]
 								}
 							]}
+							authRoute="updatePassword"
+							userId={user._id}
 						/>
 					</div>
 				) : null}
