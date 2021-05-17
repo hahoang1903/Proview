@@ -36,7 +36,7 @@ const NewMoviePage = () => {
 						},
 						{
 							name: 'casts',
-							label: 'Movie directors',
+							label: 'Movie casts',
 							rules: [
 								{
 									required: true,
