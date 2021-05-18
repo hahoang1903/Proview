@@ -38,14 +38,16 @@ const UserProfilePage = ({ user, token, books, movies }) => {
 						</div>
 						{books.map(book => (
 							<ResultCard
+								id={book._id}
+								type="book"
 								key={book._id}
 								name={book.name}
+								year={book.releasedYear}
 								img={book.image}
 								rating={Number(book.rating)}
 								fields={[
 									{ content: `Authors: ${book.authors}`, type: 'authors' },
-									{ content: `${book.genres}`, type: 'genres' },
-									{ content: `${book.releasedYear}`, type: 'year' }
+									{ content: `${book.genres}`, type: 'genres' }
 								]}
 							/>
 						))}
@@ -64,8 +66,11 @@ const UserProfilePage = ({ user, token, books, movies }) => {
 
 						{movies.map(movie => (
 							<ResultCard
+								id={movie._id}
+								type="movie"
 								key={movie._id}
 								name={movie.name}
+								year={movie.releasedYear}
 								img={movie.image}
 								rating={Number(movie.rating)}
 								fields={[
@@ -74,8 +79,7 @@ const UserProfilePage = ({ user, token, books, movies }) => {
 										type: 'directors'
 									},
 									{ content: `Casts: ${movie.casts}`, type: 'casts' },
-									{ content: `${movie.genres}`, type: 'genres' },
-									{ content: `${movie.releasedYear}`, type: 'year' }
+									{ content: `${movie.genres}`, type: 'genres' }
 								]}
 							/>
 						))}

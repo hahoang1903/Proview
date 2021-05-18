@@ -55,6 +55,10 @@ const reviewSchema = new Schema({
 		type: String,
 		required: true
 	},
+	rating: {
+		type: Number,
+		required: true
+	},
 	reviewOn: {
 		type: Schema.Types.ObjectId,
 		required: true,

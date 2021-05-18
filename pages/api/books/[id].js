@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 					.status(400)
 					.json({ success: false, message: 'Something went wrong' })
 			}
-		case 'PUT':
+		case 'PATCH':
 			try {
 				const book = await Book.findByIdAndUpdate(id, body, {
 					new: true,
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
 						.status(404)
 						.json({ success: false, message: 'Book not found' })
 
-				return res.status(200).json({ success: true, data: book })
+				return res.status(200).json({ success: true, message: 'Book deleted' })
 			} catch (error) {
 				return res
 					.status(400)

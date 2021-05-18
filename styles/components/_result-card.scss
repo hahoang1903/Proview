@@ -1,5 +1,6 @@
 .result-card {
 	padding: 1.5rem 0;
+	display: block;
 
 	& > .resource-card {
 		width: 100%;
@@ -18,7 +19,6 @@
 				& img {
 					width: 100%;
 					height: 100%;
-					object-fit: contain;
 				}
 			}
 
@@ -38,6 +38,10 @@
 
 				& .ant-image {
 					width: 100%;
+
+					& img {
+						object-fit: contain;
+					}
 				}
 			}
 		}

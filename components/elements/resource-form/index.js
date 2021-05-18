@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
-import { Form, Row, Col } from 'antd'
+import { Form, Row, Col, Image } from 'antd'
 import Input from '../input'
 import ImageUpload from '../image-upload'
 import { useAuthState } from '../../../hooks/useAuth'
@@ -28,14 +28,15 @@ const ResourceForm = ({
 	const [state, setState] = React.useState({
 		successMessage: null,
 		errorMessage: null,
-		imageUrl: ''
+		imageUrl: '',
+		upload: false
 	})
 
 	const onFinish = async values => {
 		try {
 			const res = await fetchMethod(`/api/${route}`, {
 				...values,
-				image: state.imageUrl,
+				image: state.imageUrl ? state.imageUrl : initialValues.image,
 				creator: user._id
 			})
 
@@ -83,8 +84,40 @@ const ResourceForm = ({
 			) : null}
 
 			<Row>
-				<Col xs={24} md={5} className="resource-form_image-upload">
-					<ImageUpload imgAlt="Book image" onChange={onImageChange} />
+				<Col xs={24} md={5}>
+					{initialValues.image ? (
+						state.upload ? (
+							<ImageUpload imgAlt="Resource image" onChange={onImageChange} />
+						) : (
+							<Image src={initialValues.image} width={190} />
+						)
+					) : (
+						<ImageUpload imgAlt="Resource image" onChange={onImageChange} />
+					)}
+
+					{state.upload ? (
+						<div className="resource-form-upload-buttons">
+							<Button
+								variant="contained"
+								className="resource-form-upload-buttons_button"
+								onClick={() =>
+									setState({ ...state, upload: false, imageUrl: '' })
+								}
+							>
+								Cancel
+							</Button>
+						</div>
+					) : (
+						<div className="resource-form-upload-buttons">
+							<Button
+								variant="contained"
+								className="resource-form-upload-buttons_button resource-form-upload-buttons_button--primary"
+								onClick={() => setState({ ...state, upload: true })}
+							>
+								Upload
+							</Button>
+						</div>
+					)}
 				</Col>
 
 				<Col xs={24} md={19}>

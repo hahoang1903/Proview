@@ -5,75 +5,64 @@ import ResourceForm from '../../../components/elements/resource-form'
 import { useAuthState } from '../../../hooks/useAuth'
 import { useRouter } from 'next/router'
 
-const EditMoviePage = ({ movie }) => {
+const EditBookPage = ({ book }) => {
 	const router = useRouter()
 	const { user } = useAuthState()
 
 	React.useEffect(() => {
-		document.title = 'Edit movie'
+		document.title = 'Edit book'
 
 		if (!user) router.push('/login')
-		else if (user._id != movie.creator) router.push('/')
+		else if (user._id != book.creator) router.push('/')
 	}, [])
 
 	return (
 		<SiteLayout>
 			<div className="proview-edit">
 				<ResourceForm
-					title="Edit movie"
+					title="Edit book"
 					initialValues={{
-						name: movie.name,
-						directors: movie.directors,
-						casts: movie.casts,
-						genres: movie.genres,
-						releasedYear: movie.releasedYear,
-						plot: movie.plot,
-						image: movie.image
+						name: book.name,
+						authors: book.authors,
+						genres: book.genres,
+						releasedYear: book.releasedYear,
+						plot: book.plot,
+						image: book.image
 					}}
 					formFields={[
 						{
 							name: 'name',
-							label: 'Movie name',
+							label: 'Book name',
 							rules: [
 								{
 									required: true,
-									message: 'Please provide a movie name'
+									message: 'Please provide a book name'
 								}
 							]
 						},
 						{
-							name: 'directors',
-							label: 'Movie directors',
+							name: 'authors',
+							label: 'Book authors',
 							rules: [
 								{
 									required: true,
-									message: 'Please provide movie directors'
-								}
-							]
-						},
-						{
-							name: 'casts',
-							label: 'Movie casts',
-							rules: [
-								{
-									required: true,
-									message: 'Please provide movie casts'
+									message: 'Please provide book authors'
 								}
 							]
 						},
 						{
 							name: 'genres',
-							label: 'Movie genres',
+							label: 'Book genres',
 							rules: [
 								{
 									required: true,
-									message: 'Please provide movie genres'
+									message: 'Please provide book genres'
 								}
 							]
 						},
 						{
 							name: 'releasedYear',
-							label: 'Movie released year',
+							label: 'Book released year',
 							type: 'number',
 							inputProps: {
 								min: 1600
@@ -81,23 +70,23 @@ const EditMoviePage = ({ movie }) => {
 							rules: [
 								{
 									required: true,
-									message: 'Please provide movie released year'
+									message: 'Please provide book released year'
 								}
 							]
 						},
 						{
 							name: 'plot',
-							label: 'Movie description',
+							label: 'Book description',
 							rules: [
 								{
 									required: true,
-									message: 'Please provide a movie description'
+									message: 'Please provide a book description'
 								}
 							]
 						}
 					]}
 					submitText="Save"
-					route={`movies/${movie._id}`}
+					route={`books/${book._id}`}
 					fetchMethod={axios.patch}
 				/>
 			</div>
@@ -110,22 +99,22 @@ export const getStaticProps = async context => {
 		params: { id }
 	} = context
 
-	const movieRes = await axios.get(`http://localhost:3000/api/movies/${id}`)
-	const movie = movieRes.data.data
+	const bookRes = await axios.get(`http://localhost:3000/api/books/${id}`)
+	const book = bookRes.data.data
 
 	return {
 		props: {
-			movie
+			book
 		}
 	}
 }
 
 export const getStaticPaths = async () => {
-	const res = await axios.get('http://localhost:3000/api/movies')
+	const res = await axios.get('http://localhost:3000/api/books')
 
-	const movies = res.data.data
+	const books = res.data.data
 
-	const paths = movies.map(movie => ({ params: { id: movie._id.toString() } }))
+	const paths = books.map(book => ({ params: { id: book._id.toString() } }))
 
 	return {
 		paths,
@@ -133,4 +122,4 @@ export const getStaticPaths = async () => {
 	}
 }
 
-export default EditMoviePage
+export default EditBookPage

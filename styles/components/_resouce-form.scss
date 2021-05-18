@@ -12,6 +12,24 @@
 		padding-right: 3rem;
 	}
 
+	&-upload-buttons {
+		width: 12rem;
+		display: flex;
+		justify-content: center;
+		&_button {
+			margin-top: 1rem !important;
+
+			&--primary {
+				color: $color-white !important;
+				background-color: $color-primary !important;
+
+				&:hover {
+					background-color: darken($color-primary, 10%) !important;
+				}
+			}
+		}
+	}
+
 	&-buttons {
 		display: flex;
 		padding-top: 1rem;

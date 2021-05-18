@@ -13,7 +13,12 @@ const AuthControl = () => {
 		<Menu>
 			<Menu.Item key="profile">
 				<Link href={`/users/${authState.user._id}`}>
-					<a>Your profile</a>
+					<a>My profile</a>
+				</Link>
+			</Menu.Item>
+			<Menu.Item key="my-posts">
+				<Link href={`/users/${authState.user._id}/my-posts`}>
+					<a>My posts</a>
 				</Link>
 			</Menu.Item>
 			<Menu.Item key="logout" onClick={logout}>
@@ -23,7 +28,11 @@ const AuthControl = () => {
 	)
 
 	return authState.token ? (
-		<Dropdown overlay={renderMenu()} trigger={['click']}>
+		<Dropdown
+			overlay={renderMenu()}
+			trigger={['click']}
+			placement="bottomRight"
+		>
 			<Avatar
 				className="proview-header-right-item proview-header-right_avatar"
 				src={authState.user.avatar}

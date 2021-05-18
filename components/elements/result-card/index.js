@@ -1,11 +1,21 @@
 import React from 'react'
 import ResourceCard from '../resource-card'
-import { Col, Row } from 'antd'
+import Link from 'next/link'
 
-const ResultCard = ({ name, img, rating, fields = [] }) => {
+const ResultCard = ({ id, type, name, year, img, rating, fields = [] }) => {
 	return (
-		<div className="result-card">
-			<ResourceCard title={name} rating={rating} img={img} fields={fields} />
+		<div>
+			<Link href={`/${type}s/${id}`}>
+				<a className="result-card">
+					<ResourceCard
+						year={year}
+						title={name}
+						rating={rating}
+						img={img}
+						fields={fields}
+					/>
+				</a>
+			</Link>
 		</div>
 	)
 }

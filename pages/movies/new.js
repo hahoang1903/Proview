@@ -5,7 +5,7 @@ import SiteLayout from '../../components/layouts/site-layout'
 
 const NewMoviePage = () => {
 	React.useEffect(() => {
-		document.title = 'Create book'
+		document.title = 'Create movie'
 	}, [])
 
 	return (

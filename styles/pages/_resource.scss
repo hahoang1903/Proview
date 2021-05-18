@@ -1,0 +1,92 @@
+.proview-resource {
+	padding: 4rem;
+
+	&-actions {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: 0.5rem;
+	}
+
+	& .resource-card {
+		width: 100%;
+
+		& > button {
+			display: flex;
+			justify-content: flex-start;
+			align-items: stretch;
+
+			& .MuiCardActionArea-focusHighlight {
+				display: none;
+			}
+
+			&:hover {
+				cursor: initial;
+				background-color: $color-white;
+			}
+
+			& .ant-image {
+				display: flex;
+				align-items: center;
+				height: 25rem;
+				width: 18rem;
+				min-height: 25rem;
+				min-width: 18rem;
+
+				& img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+
+			& > .MuiCardContent-root {
+				flex: 1 1 auto;
+			}
+		}
+	}
+
+	&-reviews {
+		padding-top: 3rem;
+
+		&_title {
+			font-size: 1.5rem;
+			font-family: BrownBold;
+		}
+	}
+}
+
+@media (max-width: 900px) {
+	.proview-resource {
+		& .resource-card > button {
+			& .ant-image {
+				height: 23rem;
+				width: 18rem;
+			}
+		}
+	}
+}
+
+@media (max-width: 840px) {
+	.proview-resource {
+		& .resource-card > button {
+			& .ant-image {
+				height: 21rem;
+				width: 17rem;
+				min-width: 17rem;
+				min-height: 21rem;
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.proview-resource {
+		& .resource-card > button {
+			flex-direction: column;
+			align-items: center;
+
+			& .ant-image img {
+				object-fit: contain;
+			}
+		}
+	}
+}
