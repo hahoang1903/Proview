@@ -5,11 +5,14 @@ import ResultCard from '../../components/elements/result-card'
 import AdvancedSearch from '../../components/elements/advanced-search'
 
 const SearchPage = ({ books = [], movies = [] }) => {
+	const [state, setState] = React.useState({
+		books,
+		movies
+	})
+
 	React.useEffect(() => {
 		document.title = 'Search results'
 	}, [])
-
-	console.log(books)
 
 	return (
 		<SiteLayout>
@@ -21,7 +24,7 @@ const SearchPage = ({ books = [], movies = [] }) => {
 						formFields={[
 							{
 								name: 'name',
-								size: { xs: 24, md: 18 },
+								size: { xs: 24, md: 16 },
 								inputProps: {
 									autoComplete: 'off'
 								}
@@ -30,7 +33,7 @@ const SearchPage = ({ books = [], movies = [] }) => {
 								type: 'select',
 								name: 'type',
 								label: 'Search type',
-								size: { xs: 24, md: 6 },
+								size: { xs: 24, md: 4 },
 								optionList: [
 									{ value: 'all', name: 'All' },
 									{ value: 'book', name: 'Book' },
@@ -38,12 +41,24 @@ const SearchPage = ({ books = [], movies = [] }) => {
 								]
 							},
 							{
-								name: 'genres',
-								size: { xs: 24, md: 12 }
+								type: 'select',
+								name: 'sortBy',
+								label: 'Sort by',
+								size: { xs: 24, md: 4 },
+								optionList: [
+									{ value: 'name', name: 'Name' },
+									{ value: 'rating', name: 'Rating' },
+									{ value: 'releasedYear', name: 'Released year' }
+								]
 							},
 							{
-								name: 'rating',
-								size: { xs: 24, md: 6 },
+								name: 'genres',
+								size: { xs: 24, md: 7 }
+							},
+							{
+								name: 'ratingFrom',
+								label: 'Rating from',
+								size: { xs: 24, md: 5 },
 								type: 'number',
 								inputProps: {
 									min: 0,
@@ -51,9 +66,28 @@ const SearchPage = ({ books = [], movies = [] }) => {
 								}
 							},
 							{
-								name: 'releasedYear',
-								label: 'Year',
-								size: { xs: 24, md: 6 },
+								name: 'ratingTo',
+								label: 'Rating to',
+								size: { xs: 24, md: 4 },
+								type: 'number',
+								inputProps: {
+									min: 0,
+									max: 5
+								}
+							},
+							{
+								name: 'yearFrom',
+								label: 'Year From',
+								size: { xs: 24, md: 4 },
+								type: 'number',
+								inputProps: {
+									min: 1600
+								}
+							},
+							{
+								name: 'yearTo',
+								label: 'Year To',
+								size: { xs: 24, md: 4 },
 								type: 'number',
 								inputProps: {
 									min: 1600
@@ -75,13 +109,29 @@ const SearchPage = ({ books = [], movies = [] }) => {
 								size: { xs: 24, md: 7 }
 							}
 						]}
+						onFinished={setState}
 					/>
 				</div>
 
 				<div className="proview-search-section">
 					<div className="proview-search-section_title">Search results</div>
 
-					<ResultCard />
+					<div className="proview-search-section-subsection proview-search-section-subsection--books">
+						<div className="proview-search-section-subsection_title">Books</div>
+						{state.books.map(book => (
+							<ResultCard key={book._id} name={book.name} img={book.image} />
+						))}
+					</div>
+
+					<div className="proview-search-section-subsection proview-search-section-subsection--movies">
+						<div className="proview-search-section-subsection_title">
+							Movies
+						</div>
+
+						{state.movies.map(movie => (
+							<ResultCard key={movie._id} name={movie.name} img={movie.image} />
+						))}
+					</div>
 				</div>
 			</div>
 		</SiteLayout>
@@ -91,7 +141,9 @@ const SearchPage = ({ books = [], movies = [] }) => {
 export const getServerSideProps = async context => {
 	const { query } = context
 
-	if (query.type == 'book') {
+	const type = query.type ?? 'all'
+
+	if (type == 'book') {
 		const res = await axios.get('http://localhost:3000/api/books', {
 			params: query
 		})
@@ -103,7 +155,7 @@ export const getServerSideProps = async context => {
 		}
 	}
 
-	if (query.type == 'movie') {
+	if (type == 'movie') {
 		const res = await axios.get('http://localhost:3000/api/movies', {
 			params: query
 		})
@@ -115,7 +167,7 @@ export const getServerSideProps = async context => {
 		}
 	}
 
-	if (query.type == 'all') {
+	if (type == 'all') {
 		const bookRes = await axios.get('http://localhost:3000/api/books', {
 			params: query
 		})

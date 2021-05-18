@@ -3,16 +3,57 @@ import Input from '../input'
 import Button from '@material-ui/core/Button'
 import { Row, Col, Form } from 'antd'
 import Select from '../select'
+import axios from 'axios'
 
 const AdvancedSearch = ({
 	onFinished,
 	formFields = [],
 	submitText = 'Submit search'
 }) => {
+	const onFinish = async values => {
+		var books = []
+		var movies = []
+
+		const type = values.type ?? 'all'
+		switch (type) {
+			case 'all':
+				books = (
+					await axios.get('http://localhost:3000/api/books', {
+						params: { ...values, sortBy: values.sortBy ?? 'name' }
+					})
+				).data.data
+
+				movies = (
+					await axios.get('http://localhost:3000/api/movies', {
+						params: { ...values, sortBy: values.sortBy ?? 'name' }
+					})
+				).data.data
+				break
+
+			case 'book':
+				books = (
+					await axios.get('http://localhost:3000/api/books', {
+						params: { ...values, sortBy: values.sortBy ?? 'name' }
+					})
+				).data.data
+				break
+
+			case 'movie':
+				movies = (
+					await axios.get('http://localhost:3000/api/movies', {
+						params: { ...values, sortBy: values.sortBy ?? 'name' }
+					})
+				).data.data
+				break
+		}
+
+		onFinished({ books, movies })
+	}
+
 	const capitalize = name => name[0].toUpperCase() + name.slice(1)
 
 	return (
-		<Form layout="vertical" className="advanced-search" onFinish={onFinished}>
+		<Form layout="vertical" className="advanced-search" onFinish={onFinish}>
 			<Row gutter={{ xs: 0, md: 6 }}>
 				{formFields.map(field =>
 					field.name ? (
@@ -45,6 +86,7 @@ const AdvancedSearch = ({
 
 			<Row className="advanced-search_button-wrap">
 				<Button
+					type="submit"
 					variant="contained"
 					className="advanced-search_button"
 					size="large"

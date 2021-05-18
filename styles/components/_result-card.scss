@@ -7,8 +7,14 @@
 			justify-content: flex-start;
 			align-items: stretch;
 
-			& > img {
-				width: auto;
+			& .ant-image {
+				display: flex;
+				align-items: center;
+
+				& img {
+					width: 12rem;
+					height: auto;
+				}
 			}
 
 			& > .MuiCardContent-root {

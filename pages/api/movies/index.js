@@ -12,12 +12,84 @@ cloudinary.config({
 dbConnect()
 
 export default async function handler(req, res) {
-	const { method } = req
+	const { method, query } = req
 
 	switch (method) {
 		case 'GET':
+			const {
+				name,
+				directors,
+				casts,
+				genres,
+				yearFrom,
+				yearTo,
+				ratingFrom,
+				ratingTo,
+				sortBy
+			} = query
+
+			let queryObj = {}
+
+			if (name) {
+				queryObj.name = new RegExp(name, 'i')
+			}
+
+			if (directors) {
+				const directorsArr = directors.split(/[ ,]+/)
+				queryObj.directors = { $in: directorsArr }
+			}
+
+			if (casts) {
+				const castsArr = casts.split(/[ ,]+/)
+				queryObj.casts = { $in: castsArr }
+			}
+
+			if (genres) {
+				const genresArr = genres.split(/[ ,]+/)
+				queryObj.genres = { $in: genresArr }
+			}
+
+			if (yearFrom) {
+				queryObj.releasedYear = {
+					...queryObj.releasedYear,
+					$gte: Number(yearFrom)
+				}
+			}
+
+			if (yearTo) {
+				queryObj.releasedYear = {
+					...queryObj.releasedYear,
+					$lte: Number(yearTo)
+				}
+			}
+
+			if (ratingFrom) {
+				queryObj.rating = {
+					...queryObj.rating,
+					$gte: Number(ratingFrom)
+				}
+			}
+
+			if (ratingTo) {
+				queryObj.rating = {
+					...queryObj.rating,
+					$lte: Number(ratingTo)
+				}
+			}
+
 			try {
-				const movies = await Movie.find({})
+				let movies
+				switch (sortBy) {
+					case 'rating':
+						movies = await Movie.find(queryObj).sort({ rating: 1 })
+						break
+					case 'releasedYear':
+						movies = await Movie.find(queryObj).sort({ releasedYear: 1 })
+						break
+					default:
+						movies = await Movie.find(queryObj).sort({ name: 1 })
+						break
+				}
 
 				return res.status(200).json({ success: true, data: movies })
 			} catch (error) {
