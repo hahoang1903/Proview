@@ -51,6 +51,12 @@
 			font-size: 1.5rem;
 			font-family: BrownBold;
 		}
+
+		&_buttons {
+			margin-bottom: -2rem;
+			display: flex;
+			justify-content: flex-end;
+		}
 	}
 }
 

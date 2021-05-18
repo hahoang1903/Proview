@@ -82,13 +82,13 @@ export default async function handler(req, res) {
 				let books
 				switch (sortBy) {
 					case 'rating':
-						books = await Book.find(queryObj).sort({ rating: 1 })
+						books = await Book.find(queryObj).sort({ rating: -1 })
 						break
 					case 'releasedYear':
-						books = await Book.find(queryObj).sort({ releasedYear: 1 })
+						books = await Book.find(queryObj).sort({ releasedYear: -1 })
 						break
 					default:
-						books = await Book.find(queryObj).sort({ name: 1 })
+						books = await Book.find(queryObj).sort({ name: -1 })
 						break
 				}
 

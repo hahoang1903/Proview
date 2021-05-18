@@ -6,9 +6,12 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import EditIcon from '@material-ui/icons/Edit'
+import AddIcon from '@material-ui/icons/Add'
 import { useAuthState } from '../../../hooks/useAuth'
 import { useRouter } from 'next/router'
 import { Popconfirm } from 'antd'
+import ReviewForm from '../../../components/elements/review-form'
+import ReviewCard from '../../../components/elements/review-card'
 
 const BookPage = ({ book, reviews }) => {
 	const { user } = useAuthState()
@@ -22,6 +25,18 @@ const BookPage = ({ book, reviews }) => {
 		await axios.delete(`/api/books/${book._id}`)
 		router.push(`/users/${user._id}/my-posts`)
 	}
+
+	const deleteReview = async (id, onModel, author, rating, reviewOn) => {
+		await axios.delete(`/api/reviews/${id}`, {
+			data: { onModel, author, rating, reviewOn }
+		})
+		router.reload()
+	}
+
+	const [reviewState, setReviewState] = React.useState({
+		viewState: 'view',
+		review: null
+	})
 
 	return (
 		<SiteLayout>
@@ -63,9 +78,109 @@ const BookPage = ({ book, reviews }) => {
 				/>
 
 				<div className="proview-resource-reviews">
-					<div className="proview-resource-reviews_title">Reviews</div>
+					<div className="proview-resource-reviews_title">
+						<span>Reviews</span>
+						{user && reviews.every(review => review.author != user._id) ? (
+							<Tooltip title="Add review" placement="top">
+								<IconButton
+									aria-label="add"
+									onClick={() =>
+										setReviewState({ ...reviewState, viewState: 'writeNew' })
+									}
+								>
+									<AddIcon />
+								</IconButton>
+							</Tooltip>
+						) : null}
+					</div>
 
-					<div className="proview-resource-review"></div>
+					{user && reviewState.viewState == 'writeNew' ? (
+						<div className="proview-resource-reviews_new">
+							<ReviewForm
+								userId={user._id}
+								model="Book"
+								modelId={book._id}
+								submitText="Post"
+								fetchMethod={axios.post}
+								onSubmit={() =>
+									setReviewState({ ...reviewState, viewState: 'view' })
+								}
+								authRoute="reviews"
+							/>
+						</div>
+					) : null}
+
+					{user && reviewState.viewState == 'edit' ? (
+						<div className="proview-resource-reviews_new">
+							<ReviewForm
+								initialValues={{
+									title: reviewState.review.title,
+									content: reviewState.review.content,
+									rating: reviewState.review.rating
+								}}
+								userId={user._id}
+								model="Book"
+								modelId={book._id}
+								submitText="Save"
+								fetchMethod={axios.patch}
+								onSubmit={() =>
+									setReviewState({ review: null, viewState: 'view' })
+								}
+								authRoute={`reviews/${reviewState.review._id}`}
+							/>
+						</div>
+					) : null}
+
+					{reviewState.viewState == 'view'
+						? reviews.map(review => (
+								<React.Fragment key={review._id}>
+									{user && review.author == user._id ? (
+										<div className="proview-resource-reviews_buttons">
+											<Tooltip title="Edit" placement="top">
+												<IconButton
+													aria-label="edit"
+													onClick={() =>
+														setReviewState({ review, viewState: 'edit' })
+													}
+												>
+													<EditIcon />
+												</IconButton>
+											</Tooltip>
+
+											<Popconfirm
+												title="Are you sure to delete this review?"
+												onConfirm={() =>
+													deleteReview(
+														review._id,
+														review.onModel,
+														review.author,
+														review.rating,
+														review.reviewOn
+													)
+												}
+												okText="Yes"
+												cancelText="No"
+											>
+												<Tooltip title="Delete" placement="top">
+													<IconButton aria-label="delete">
+														<DeleteIcon />
+													</IconButton>
+												</Tooltip>
+											</Popconfirm>
+										</div>
+									) : null}
+
+									<ReviewCard
+										author={review.author}
+										title={review.title}
+										content={review.content}
+										at={review.at}
+										rating={review.rating}
+										score={review.score}
+									/>
+								</React.Fragment>
+						  ))
+						: null}
 				</div>
 			</div>
 		</SiteLayout>

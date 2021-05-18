@@ -1,10 +1,13 @@
 import { dbConnect } from '../../../util/mongodb'
 import Review from '../../../models/review'
+import Book from '../../../models/book'
+import Movie from '../../../models/movie'
+import User from '../../../models/user'
 
 dbConnect()
 
 export default async function handler(req, res) {
-	const { method } = req
+	const { method, body } = req
 
 	switch (method) {
 		case 'GET':
@@ -17,11 +20,11 @@ export default async function handler(req, res) {
 				if (author) {
 					reviews = await Review.find({ author })
 						.limit(Number(limit))
-						.sort({ score: 1 })
+						.sort({ score: -1 })
 				} else if (reviewOn) {
-					reviews = await Review.find({ reviewOn }).sort({ score: 1 })
+					reviews = await Review.find({ reviewOn }).sort({ score: -1 })
 				} else {
-					reviews = await Review.find({}).sort({ score: 1 })
+					reviews = await Review.find({}).sort({ score: -1 })
 				}
 
 				return res.status(200).json({ success: true, data: reviews })
@@ -30,7 +33,29 @@ export default async function handler(req, res) {
 			}
 		case 'POST':
 			try {
-				const review = await Review.create(req.body)
+				const review = await Review.create(body)
+
+				let resource
+				switch (body.onModel) {
+					case 'Book':
+						resource = await Book.findById(body.reviewOn)
+						break
+					case 'Movie':
+						resource = await Movie.findById(body.reviewOn)
+						break
+					default:
+						throw new Error('Bad onModel value')
+				}
+
+				resource.rating =
+					(resource.rating * resource.reviews.length + review.rating) /
+					(resource.reviews.length + 1)
+				resource.reviews.push(review)
+				resource.save()
+
+				const user = await User.findById(body.author)
+				user.reviews.push(review)
+				user.save()
 
 				return res.status(201).json({ success: true, data: review })
 			} catch (error) {

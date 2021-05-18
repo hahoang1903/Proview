@@ -38,13 +38,6 @@ const userSchema = new Schema({
 		required: true,
 		default: 'Your bio is currently blank.'
 	},
-	resetPasswordToken: String,
-	resetPasswordExpire: Date,
-	score: {
-		type: Number,
-		required: true,
-		default: 0
-	},
 	since: {
 		type: Date,
 		default: Date.now,
@@ -89,23 +82,6 @@ userSchema.methods.getSignedJwtToken = function () {
 // Match user entered password to hashed password in database
 userSchema.methods.matchPassword = async function (enteredPassword) {
 	return await bcrypt.compare(enteredPassword, this.password)
-}
-
-// Generate and hash password token
-userSchema.methods.getResetPasswordToken = function () {
-	// Generate token
-	const resetToken = crypto.randomBytes(20).toString('hex')
-
-	// Hash token and set to resetPasswordToken field
-	this.resetPasswordToken = crypto
-		.createHash('sha256')
-		.update(resetToken)
-		.digest('hex')
-
-	// Set expire
-	this.resetPasswordExpire = Date.now() + 10 * 60 * 1000
-
-	return resetToken
 }
 
 const User = mongoose.models['User'] || mongoose.model('User', userSchema)

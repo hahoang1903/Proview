@@ -34,7 +34,12 @@ const ResourceCard = ({
 								borderColor="transparent"
 								className="resource-card-rating"
 							>
-								<Rating name="read-only" value={rating} readOnly />
+								<Rating
+									name="read-only"
+									value={rating}
+									readOnly
+									precision={0.1}
+								/>
 							</Box>
 						) : null}
 					</Typography>

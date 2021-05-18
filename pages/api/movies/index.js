@@ -91,13 +91,13 @@ export default async function handler(req, res) {
 				let movies
 				switch (sortBy) {
 					case 'rating':
-						movies = await Movie.find(queryObj).sort({ rating: 1 })
+						movies = await Movie.find(queryObj).sort({ rating: -1 })
 						break
 					case 'releasedYear':
-						movies = await Movie.find(queryObj).sort({ releasedYear: 1 })
+						movies = await Movie.find(queryObj).sort({ releasedYear: -1 })
 						break
 					default:
-						movies = await Movie.find(queryObj).sort({ name: 1 })
+						movies = await Movie.find(queryObj).sort({ name: -1 })
 						break
 				}
 

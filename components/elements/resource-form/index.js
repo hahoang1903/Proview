@@ -95,7 +95,7 @@ const ResourceForm = ({
 						<ImageUpload imgAlt="Resource image" onChange={onImageChange} />
 					)}
 
-					{state.upload ? (
+					{initialValues.image && state.upload ? (
 						<div className="resource-form-upload-buttons">
 							<Button
 								variant="contained"
@@ -107,7 +107,7 @@ const ResourceForm = ({
 								Cancel
 							</Button>
 						</div>
-					) : (
+					) : initialValues.image ? (
 						<div className="resource-form-upload-buttons">
 							<Button
 								variant="contained"
@@ -117,7 +117,7 @@ const ResourceForm = ({
 								Upload
 							</Button>
 						</div>
-					)}
+					) : null}
 				</Col>
 
 				<Col xs={24} md={19}>

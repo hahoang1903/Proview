@@ -1,0 +1,25 @@
+.review-form {
+	&_rating {
+		& label {
+			font-size: 1.25rem;
+		}
+
+		font-size: 1rem;
+		display: flex;
+		align-items: center;
+	}
+
+	&-buttons {
+		margin-top: 1rem;
+
+		&_button {
+			margin-left: 1rem !important;
+			color: $color-white !important;
+			background-color: $color-primary !important;
+
+			&:hover {
+				background-color: darken($color-primary, 10%) !important;
+			}
+		}
+	}
+}

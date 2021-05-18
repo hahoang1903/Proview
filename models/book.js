@@ -30,7 +30,8 @@ const bookSchema = new Schema({
 	},
 	rating: {
 		type: Number,
-		defalut: 0
+		required: true,
+		default: 0.0
 	},
 	releasedYear: {
 		type: Number,

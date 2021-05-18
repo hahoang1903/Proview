@@ -9,6 +9,7 @@ import { useAuthState, useAuthenticate } from '../../../hooks/useAuth'
 import DefaultAva from '../../../public/img/default-avatar.svg'
 import ProfileForm from '../../../components/elements/profile-form'
 import ImageUpload from '../../../components/elements/image-upload'
+import ReviewCard from '../../../components/elements/review-card'
 import { useRouter } from 'next/router'
 
 const UserProfilePage = ({ user, token, reviews }) => {
@@ -114,12 +115,6 @@ const UserProfilePage = ({ user, token, reviews }) => {
 
 								<div className="proview-profile_role">{user.role}</div>
 
-								<div className="proview-profile_credit">
-									<span className="proview-profile_credit--main">
-										{user.score}
-									</span>
-									<span className="proview-profile_credit--sub">Credit</span>
-								</div>
 								{token == authState.token ? (
 									upload ? (
 										<React.Fragment>
@@ -189,15 +184,31 @@ const UserProfilePage = ({ user, token, reviews }) => {
 
 						<Row>
 							<div className="proview-profile-top">
-								<div className="proview-profile-top_title">Top reviews</div>
+								<div className="proview-profile-top_title">Reviews</div>
 
 								<div className="proview-profile-top-reviews">
 									{reviews.length > 0 ? (
 										reviews.map(review => (
-											<div className="proview-profile-top-reviews-review">
+											<div
+												key={review._id}
+												className="proview-profile-top-reviews-review"
+											>
 												<div className="proview-profile-top-reviews-review_title">
-													<Link>
-														<a>{review.title}</a>
+													<Link
+														href={`/${String(review.onModel).toLowerCase()}s/${
+															review.reviewOn
+														}`}
+													>
+														<a>
+															<ReviewCard
+																author={review.author}
+																title={review.title}
+																content={review.content}
+																at={review.at}
+																rating={review.rating}
+																score={review.score}
+															/>
+														</a>
 													</Link>
 												</div>
 											</div>

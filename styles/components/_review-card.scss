@@ -1,0 +1,54 @@
+.review-card {
+	border: 1px solid rgba($color-black, 0.2);
+	border-radius: 10px;
+	margin: 2rem 0;
+
+	&-header {
+		border-bottom: 1px solid rgba($color-black, 0.1);
+		padding: 1rem 2rem 0.25rem 2rem;
+
+		&-user {
+			display: flex;
+			align-items: center;
+
+			&_ava {
+				margin-right: 1rem;
+			}
+
+			&_info {
+				display: flex;
+				flex-direction: column;
+
+				&--main {
+					font-size: 1rem;
+					font-weight: 700;
+				}
+
+				&--sub > span {
+					color: lighten($color-black, 40%);
+				}
+			}
+		}
+
+		&_title {
+			font-family: BrownBold;
+			font-size: 1.25rem;
+			display: flex;
+			align-items: center;
+
+			&--rating {
+				margin-left: 1rem;
+				font-size: inherit !important;
+			}
+		}
+	}
+
+	&-body {
+		margin-top: 0.75rem;
+		padding: 0.25rem 2rem 2rem 2rem;
+
+		&-main {
+			font-size: 1rem;
+		}
+	}
+}
