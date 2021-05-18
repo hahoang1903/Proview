@@ -24,7 +24,10 @@ const AuthControl = () => {
 
 	return authState.token ? (
 		<Dropdown overlay={renderMenu()} trigger={['click']}>
-			<Avatar className="proview-header-right-item proview-header-right_avatar" />
+			<Avatar
+				className="proview-header-right-item proview-header-right_avatar"
+				src={authState.user.avatar}
+			/>
 		</Dropdown>
 	) : (
 		<React.Fragment>
