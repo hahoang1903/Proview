@@ -4,50 +4,20 @@ import Button from '@material-ui/core/Button'
 import { Row, Col, Form } from 'antd'
 import Select from '../select'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
-const AdvancedSearch = ({
-	onFinished,
-	formFields = [],
-	submitText = 'Submit search'
-}) => {
+const AdvancedSearch = ({ formFields = [], submitText = 'Submit search' }) => {
+	const router = useRouter()
+
 	const onFinish = async values => {
-		var books = []
-		var movies = []
-
-		const type = values.type ?? 'all'
-		switch (type) {
-			case 'all':
-				books = (
-					await axios.get('http://localhost:3000/api/books', {
-						params: { ...values, sortBy: values.sortBy ?? 'name' }
-					})
-				).data.data
-
-				movies = (
-					await axios.get('http://localhost:3000/api/movies', {
-						params: { ...values, sortBy: values.sortBy ?? 'name' }
-					})
-				).data.data
-				break
-
-			case 'book':
-				books = (
-					await axios.get('http://localhost:3000/api/books', {
-						params: { ...values, sortBy: values.sortBy ?? 'name' }
-					})
-				).data.data
-				break
-
-			case 'movie':
-				movies = (
-					await axios.get('http://localhost:3000/api/movies', {
-						params: { ...values, sortBy: values.sortBy ?? 'name' }
-					})
-				).data.data
-				break
-		}
-
-		onFinished({ books, movies })
+		router.push({
+			pathname: '/search',
+			query: {
+				...values,
+				type: values.type ?? 'all',
+				sortBy: values.sortBy ?? 'name'
+			}
+		})
 	}
 
 	const capitalize = name => name[0].toUpperCase() + name.slice(1)

@@ -40,7 +40,6 @@ const LoginPage = () => {
 				}
 			]}
 			submitText="Login"
-			forgotPassword={true}
 			linkText="Create an account"
 			linkTo="/signup"
 			fetchMethod={axios.post}

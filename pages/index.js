@@ -42,8 +42,8 @@ const HomePage = () => {
 					</div>
 
 					<div className="proview-home-suggest_options">
-						<ResourceCard title="Books" mediaType="books" />
-						<ResourceCard title="Movies" mediaType="movies" />
+						<ResourceCard title="Books" img="/img/books.jpg" />
+						<ResourceCard title="Movies" img="/img/movies.jpg" />
 					</div>
 				</div>
 

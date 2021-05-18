@@ -14,7 +14,6 @@ const AuthForm = ({
 	submitText = '',
 	linkText = '',
 	linkTo = '/',
-	forgotPassword = false,
 	fetchMethod,
 	authRoute = '',
 	useAuthDispatch
@@ -69,14 +68,6 @@ const AuthForm = ({
 						</Form.Item>
 					)
 				})}
-
-				{forgotPassword ? (
-					<div className="auth-form-link auth-form-link--right">
-						<Link href="/forgot-password">
-							<a>Forgot password?</a>
-						</Link>
-					</div>
-				) : null}
 
 				<Button
 					className="auth-form-button"

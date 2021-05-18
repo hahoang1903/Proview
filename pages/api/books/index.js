@@ -2,7 +2,6 @@ import { v2 as cloudinary } from 'cloudinary'
 import { dbConnect } from '../../../util/mongodb'
 import Book from '../../../models/book'
 import User from '../../../models/user'
-import { addQueryPropIfExist } from '../../../util/utils'
 
 cloudinary.config({
 	cloud_name: 'hahoangcloud',
@@ -18,6 +17,7 @@ export default async function handler(req, res) {
 	switch (method) {
 		case 'GET':
 			const {
+				creator,
 				name,
 				authors,
 				genres,
@@ -30,18 +30,24 @@ export default async function handler(req, res) {
 
 			let queryObj = {}
 
+			if (creator) {
+				queryObj.creator = creator
+			}
+
 			if (name) {
 				queryObj.name = new RegExp(name, 'i')
 			}
 
 			if (authors) {
 				const authorsArr = authors.split(/[ ,]+/)
-				queryObj.authors = { $in: authorsArr }
+				const authorsRegex = authorsArr.map(author => new RegExp(author, 'i'))
+				queryObj.authors = { $in: authorsRegex }
 			}
 
 			if (genres) {
 				const genresArr = genres.split(/[ ,]+/)
-				queryObj.genres = { $in: genresArr }
+				const genresRegex = genresArr.map(author => new RegExp(author, 'i'))
+				queryObj.genres = { $in: genresRegex }
 			}
 
 			if (yearFrom) {
@@ -101,6 +107,7 @@ export default async function handler(req, res) {
 				const user = await User.findById(body.creator)
 
 				user.books.push(book)
+				user.save()
 
 				return res.status(201).json({ success: true, message: 'Book created' })
 			} catch (error) {

@@ -5,11 +5,6 @@ import ResultCard from '../../components/elements/result-card'
 import AdvancedSearch from '../../components/elements/advanced-search'
 
 const SearchPage = ({ books = [], movies = [] }) => {
-	const [state, setState] = React.useState({
-		books,
-		movies
-	})
-
 	React.useEffect(() => {
 		document.title = 'Search results'
 	}, [])
@@ -109,7 +104,6 @@ const SearchPage = ({ books = [], movies = [] }) => {
 								size: { xs: 24, md: 7 }
 							}
 						]}
-						onFinished={setState}
 					/>
 				</div>
 
@@ -118,9 +112,25 @@ const SearchPage = ({ books = [], movies = [] }) => {
 
 					<div className="proview-search-section-subsection proview-search-section-subsection--books">
 						<div className="proview-search-section-subsection_title">Books</div>
-						{state.books.map(book => (
-							<ResultCard key={book._id} name={book.name} img={book.image} />
+						{books.map(book => (
+							<ResultCard
+								key={book._id}
+								name={book.name}
+								img={book.image}
+								rating={Number(book.rating)}
+								fields={[
+									{ content: `Authors: ${book.authors}`, type: 'authors' },
+									{ content: `${book.genres}`, type: 'genres' },
+									{ content: `${book.releasedYear}`, type: 'year' }
+								]}
+							/>
 						))}
+
+						{books.length == 0 ? (
+							<div className="proview-search-section-subsection_nf">
+								No books found
+							</div>
+						) : null}
 					</div>
 
 					<div className="proview-search-section-subsection proview-search-section-subsection--movies">
@@ -128,9 +138,29 @@ const SearchPage = ({ books = [], movies = [] }) => {
 							Movies
 						</div>
 
-						{state.movies.map(movie => (
-							<ResultCard key={movie._id} name={movie.name} img={movie.image} />
+						{movies.map(movie => (
+							<ResultCard
+								key={movie._id}
+								name={movie.name}
+								img={movie.image}
+								rating={Number(movie.rating)}
+								fields={[
+									{
+										content: `Directors: ${movie.directors}`,
+										type: 'directors'
+									},
+									{ content: `Casts: ${movie.casts}`, type: 'casts' },
+									{ content: `${movie.genres}`, type: 'genres' },
+									{ content: `${movie.releasedYear}`, type: 'year' }
+								]}
+							/>
 						))}
+
+						{movies.length == 0 ? (
+							<div className="proview-search-section-subsection_nf">
+								No movies found
+							</div>
+						) : null}
 					</div>
 				</div>
 			</div>

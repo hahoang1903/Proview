@@ -17,6 +17,7 @@ export default async function handler(req, res) {
 	switch (method) {
 		case 'GET':
 			const {
+				creator,
 				name,
 				directors,
 				casts,
@@ -30,23 +31,32 @@ export default async function handler(req, res) {
 
 			let queryObj = {}
 
+			if (creator) {
+				queryObj.creator = creator
+			}
+
 			if (name) {
 				queryObj.name = new RegExp(name, 'i')
 			}
 
 			if (directors) {
 				const directorsArr = directors.split(/[ ,]+/)
-				queryObj.directors = { $in: directorsArr }
+				const directorsRegex = directorsArr.map(
+					director => new RegExp(director, 'i')
+				)
+				queryObj.directors = { $in: directorsRegex }
 			}
 
 			if (casts) {
 				const castsArr = casts.split(/[ ,]+/)
-				queryObj.casts = { $in: castsArr }
+				const castsRegex = castsArr.map(director => new RegExp(director, 'i'))
+				queryObj.casts = { $in: castsRegex }
 			}
 
 			if (genres) {
 				const genresArr = genres.split(/[ ,]+/)
-				queryObj.genres = { $in: genresArr }
+				const genresRegex = genresArr.map(director => new RegExp(director, 'i'))
+				queryObj.genres = { $in: genresRegex }
 			}
 
 			if (yearFrom) {
@@ -105,6 +115,7 @@ export default async function handler(req, res) {
 				const user = await User.findById(body.creator)
 
 				user.movies.push(movie)
+				user.save()
 
 				return res.status(201).json({ success: true, message: 'Movie created' })
 			} catch (error) {

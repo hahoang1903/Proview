@@ -2,12 +2,12 @@ import React from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Row, Col } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
 import SiteLayout from '../../../components/layouts/site-layout'
 import { useAuthState } from '../../../hooks/useAuth'
+import ResultCard from '../../../components/elements/result-card'
 
-const UserProfilePage = ({ user, token }) => {
+const UserProfilePage = ({ user, token, books, movies }) => {
 	const authState = useAuthState()
 	const router = useRouter()
 
@@ -28,6 +28,65 @@ const UserProfilePage = ({ user, token }) => {
 						</Link>
 					</div>
 				</div>
+
+				<div className="proview-profile-section">
+					<div className="proview-profile-section_title">My posts</div>
+
+					<div className="proview-profile-section-subsection proview-profile-section-subsection--books">
+						<div className="proview-profile-section-subsection_title">
+							Books
+						</div>
+						{books.map(book => (
+							<ResultCard
+								key={book._id}
+								name={book.name}
+								img={book.image}
+								rating={Number(book.rating)}
+								fields={[
+									{ content: `Authors: ${book.authors}`, type: 'authors' },
+									{ content: `${book.genres}`, type: 'genres' },
+									{ content: `${book.releasedYear}`, type: 'year' }
+								]}
+							/>
+						))}
+
+						{books.length == 0 ? (
+							<div className="proview-profile-section-subsection_nf">
+								No books found
+							</div>
+						) : null}
+					</div>
+
+					<div className="proview-profile-section-subsection proview-profile-section-subsection--movies">
+						<div className="proview-profile-section-subsection_title">
+							Movies
+						</div>
+
+						{movies.map(movie => (
+							<ResultCard
+								key={movie._id}
+								name={movie.name}
+								img={movie.image}
+								rating={Number(movie.rating)}
+								fields={[
+									{
+										content: `Directors: ${movie.directors}`,
+										type: 'directors'
+									},
+									{ content: `Casts: ${movie.casts}`, type: 'casts' },
+									{ content: `${movie.genres}`, type: 'genres' },
+									{ content: `${movie.releasedYear}`, type: 'year' }
+								]}
+							/>
+						))}
+
+						{movies.length == 0 ? (
+							<div className="proview-profile-section-subsection_nf">
+								No movies found
+							</div>
+						) : null}
+					</div>
+				</div>
 			</div>
 		</SiteLayout>
 	)
@@ -42,13 +101,13 @@ export const getStaticProps = async context => {
 
 	const bookRes = await axios.get(`http://localhost:3000/api/books`, {
 		params: {
-			author: id
+			creator: id
 		}
 	})
 
 	const movieRes = await axios.get(`http://localhost:3000/api/movies`, {
 		params: {
-			author: id
+			creator: id
 		}
 	})
 

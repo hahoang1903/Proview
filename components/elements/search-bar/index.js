@@ -19,15 +19,13 @@ const SearchBar = ({
 			: {}
 
 	const onFinish = values => {
-		var query = `?type=${searchType}`
+		const { search, filterBy } = values
+		const query = { type: searchType, [filterBy ?? 'name']: search }
 
-		query = values.search
-			? values.filterBy
-				? query.concat(`${values.filterBy.toLowerCase()}=${values.search}`)
-				: query.concat(`name=${values.search}`)
-			: query
-
-		router.push(`/search${query}`)
+		router.push({
+			pathname: '/search',
+			query
+		})
 	}
 
 	return (

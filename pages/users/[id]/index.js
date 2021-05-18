@@ -2,11 +2,14 @@ import React from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import { Row, Col, Image } from 'antd'
+import Button from '@material-ui/core/Button'
 import { RightOutlined } from '@ant-design/icons'
 import SiteLayout from '../../../components/layouts/site-layout'
-import { useAuthState } from '../../../hooks/useAuth'
+import { useAuthState, useAuthenticate } from '../../../hooks/useAuth'
 import DefaultAva from '../../../public/img/default-avatar.svg'
 import ProfileForm from '../../../components/elements/profile-form'
+import ImageUpload from '../../../components/elements/image-upload'
+import { useRouter } from 'next/router'
 
 const UserProfilePage = ({ user, token, reviews }) => {
 	React.useEffect(() => {
@@ -16,7 +19,23 @@ const UserProfilePage = ({ user, token, reviews }) => {
 	const tabs = ['Profile', 'Edit profile', 'Change password']
 
 	const authState = useAuthState()
+	const authenticate = useAuthenticate()
+	const router = useRouter()
 	const [activeTab, setActiveTab] = React.useState(tabs[0])
+	const [previewImage, setPreviewImage] = React.useState('')
+	const [upload, setUpload] = React.useState(false)
+
+	const uploadAva = async () => {
+		const res = await axios.post('/api/auth/uploadAva', {
+			image: previewImage,
+			id: authState.user._id
+		})
+
+		const { user: newUser, token } = res.data
+
+		authenticate({ user: newUser, token })
+		router.reload()
+	}
 
 	return (
 		<SiteLayout>
@@ -76,7 +95,18 @@ const UserProfilePage = ({ user, token, reviews }) => {
 								xxl={4}
 								className="proview-profile_ava-box"
 							>
-								{user.avatar ? (
+								{token == authState.token ? (
+									upload ? (
+										<ImageUpload
+											imgAlt="user avatar"
+											onChange={setPreviewImage}
+										/>
+									) : user.avatar ? (
+										<Image src={user.avatar} />
+									) : (
+										<DefaultAva width={200} height="100%" />
+									)
+								) : user.avatar ? (
 									<Image src={user.avatar} />
 								) : (
 									<DefaultAva width={200} height="100%" />
@@ -90,7 +120,35 @@ const UserProfilePage = ({ user, token, reviews }) => {
 									</span>
 									<span className="proview-profile_credit--sub">Credit</span>
 								</div>
-								{token == authState.token ? <div>Upload photo</div> : null}
+								{token == authState.token ? (
+									upload ? (
+										<React.Fragment>
+											<Button
+												variant="contained"
+												className="proview-profile_upload-button"
+												onClick={uploadAva}
+											>
+												Save Image
+											</Button>
+
+											<Button
+												variant="contained"
+												className="proview-profile_upload-button proview-profile_upload-button--cancel"
+												onClick={() => setUpload(false)}
+											>
+												Cancel
+											</Button>
+										</React.Fragment>
+									) : (
+										<Button
+											variant="contained"
+											className="proview-profile_upload-button"
+											onClick={() => setUpload(true)}
+										>
+											Upload
+										</Button>
+									)
+								) : null}
 							</Col>
 
 							<Col

@@ -30,7 +30,7 @@ const ImageUpload = ({ onChange, imgAlt }) => {
 		const previewImage =
 			fileList.length > 0 ? await getBase64(fileList[0].originFileObj) : ''
 		setState({ ...state, fileList, previewImage })
-		onChange(state.previewImage)
+		onChange(previewImage)
 	}
 
 	return (

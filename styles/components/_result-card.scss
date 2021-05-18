@@ -1,4 +1,6 @@
 .result-card {
+	padding: 1.5rem 0;
+
 	& > .resource-card {
 		width: 100%;
 
@@ -10,15 +12,18 @@
 			& .ant-image {
 				display: flex;
 				align-items: center;
+				height: 18rem;
+				width: 12rem;
 
 				& img {
-					width: 12rem;
-					height: auto;
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
 				}
 			}
 
 			& > .MuiCardContent-root {
-				width: 100%;
+				flex: 1 1 auto;
 			}
 		}
 	}
@@ -31,9 +36,8 @@
 				flex-direction: column;
 				align-items: center;
 
-				& > img {
-					width: 15rem;
-					height: auto;
+				& .ant-image {
+					width: 100%;
 				}
 			}
 		}

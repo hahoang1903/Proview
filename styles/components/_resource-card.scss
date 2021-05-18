@@ -5,20 +5,34 @@
 		margin-left: 2rem;
 	}
 
+	&-title {
+		display: flex;
+		align-items: center;
+	}
+
+	&-rating {
+		margin-left: 1rem;
+	}
+
 	&-image {
-		height: 18rem;
+		height: 17rem;
 
 		&.MuiCardMedia-root {
 			background-size: cover;
 			background-position: left top;
 		}
+	}
 
-		&--books {
-			background-image: url('../../public/img/books.jpg');
-		}
+	& &-content {
+		padding: 1.5rem 2rem;
+	}
 
-		&--movies {
-			background-image: url('../../public/img/movies.jpg');
+	&-field {
+		font-size: 1rem;
+		padding: 0.25rem 0;
+
+		&--genres {
+			color: $color-tapa;
 		}
 	}
 }
