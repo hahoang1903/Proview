@@ -24,6 +24,7 @@ const Section = ({ name, pretitle, title, sub }) => {
 
 			<div className="section-search-bar">
 				<SearchBar
+					searchType={name}
 					optionList={optionList}
 					haveButton={true}
 					placeholder={`Search for ${name}s`}

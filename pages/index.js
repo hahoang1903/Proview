@@ -61,7 +61,7 @@ const HomePage = () => {
 							</Link>
 
 							<div className="proview-home-suggest_small">
-								to post, reviews, comments, and many more
+								to post, reviews and many more
 							</div>
 						</div>
 					</div>
